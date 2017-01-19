@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Brigtparagon</title>
+    <link rel="shortcut icon" href="fav.png">
+    <link href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic" rel="stylesheet">
+    <link href="css/basic.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <ul>
+          <li class="home"><a href="/">Home</a></li>
+          <li class="upload"><a href="/post">Upload</a></li>
+        </ul>
+      </div>
+    </header>
+    <div align="center">
+      <h2>Post an Article</h2>
+      <div>
+        <form name="postForm" action="/post" method="post">
+          <fieldset style = "width:30%">
+            <legend>글 작성</legend>
+              제목 <br><input type = "text" name = "title"/><br><br>
+              <legend>내용</legend>
+              <textarea rows="10" cols="40" name="comment" form="postForm"></textarea>
+          </fieldset>
+          <input type="submit" value="게시">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
