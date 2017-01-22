@@ -3,7 +3,6 @@ var dbUrl = 'mongodb://localhost/mernblog';
 
 mongoose.connect(dbUrl, { safe: true });
 
-// ctrl + c -> stop mongoose
 process.on('SIGINT', function() {
   mongoose.connection.close(function () {
     console.log('Mongoose default connection disconnected');
