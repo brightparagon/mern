@@ -20,15 +20,13 @@
     <div align="center">
       <h2>Post an Article</h2>
       <div>
-        <form name="postForm" action="/post" method="post">
-          <fieldset style = "width:30%">
-            <legend>글 작성</legend>
-              제목 <br><input type="text" name = "title"/><br><br>
-              <legend>내용</legend>
-              <textarea rows="10" cols="40" name="comment" form="postForm"></textarea>
-          </fieldset>
-          <input type="submit" value="게시">
-        </form>
+        <!-- modify here -->
+        <fieldset style = "width:30%">
+          <legend><%= post.title %></legend>
+            <legend>내용</legend>
+            <textarea rows="10" cols="40" name="content"><%= post.content %></textarea>
+        </fieldset>
+
       </div>
     </div>
   </body>

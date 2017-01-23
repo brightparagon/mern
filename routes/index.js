@@ -6,8 +6,9 @@ var ctrlPost = require('./post');
 //     res.render('index');
 // });
 
-router.get('/', ctrlPost.getPosts);
-router.get('/upload', ctrlPost.upload);
-router.post('/post', ctrlPost.createPost);
+router.get('/', ctrlPost.getPosts); // posts list in index.ejs
+router.get('/upload', ctrlPost.upload); // upload a post
+router.get('/post/:postId', ctrlPost.getPost); // retrieve a post
+router.post('/post', ctrlPost.createPost); // create a post
 
 module.exports = router;

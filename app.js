@@ -11,7 +11,6 @@ var routesApi = require('./routes/index');
 var app = express();
 app.locals.appTitle = "mern-blog";
 
-// set views folder where ejs template files are stored
 // app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 // app.engine('html', require('ejs').renderFile);

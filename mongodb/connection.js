@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var dbUrl = 'mongodb://localhost/mernblog';
-
+mongoose.Promise = global.Promise;
 mongoose.connect(dbUrl, { safe: true });
 
 process.on('SIGINT', function() {

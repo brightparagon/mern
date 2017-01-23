@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
 
 module.exports.upload = function(req, res, next) {
-  res.render('post');
+  res.render('upload');
 };
 
 module.exports.getPosts = function(req, res, next) {
@@ -14,9 +14,18 @@ module.exports.getPosts = function(req, res, next) {
 };
 
 module.exports.createPost = function(req, res, next) {
-  var post = new Post(req.body);
+  var post = new Post();
+  post.title = req.body.title;
+  post.content = req.body.content;
   post.save(function(err, post) {
     if(err) return next(err);
-    res.status(200).json({post : post});
+    res.render('post', {post: post});
+  });
+};
+
+module.exports.getPost = function(req, res, next) {
+  Post.findById(req.params.postId, function(err, post) {
+    if(err) return next(err);
+    res.render('post', {post: post});
   });
 };
