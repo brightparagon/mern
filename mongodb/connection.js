@@ -11,6 +11,7 @@ process.on('SIGINT', function() {
 });
 
 require('./models/post');
+require('./models/user');
 
 // mongoose.connect('mongodb://ygy:9708@ds117209.mlab.com:17209/ygy_study');
 //
