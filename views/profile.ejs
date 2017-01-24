@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <% include ./header.ejs %>
+  </head>
+  <body>
+    <header>
+      <% include ./navigation.ejs %>
+    </header>
+    <div align="center">
+      <h2>Profile</h2>
+      <div>
+        <fieldset style="width:30%">
+            <div align="left">
+              Email Address: <h4><%= token.email %></h4><br><br>
+              Name: <h4><%= token.name %></h4><br><br>
+              Facebook Address: <h4><%= token.facebook %></h4><br><br>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<html lang="ko">
+  <head>
+    <% include ./header.ejs %>
+  </head>
+  <body>
+    <header>
+      <% include ./navigation.ejs %>
+    </header>
+    <div align="center">
+      <h1>글 목록</h1>
+      <ul>
+        <% for(var i=0; i<posts.length; i++) { %>
+          <li>
+            <a href='/post?postId=<%= posts[i]._id %>'>
+                <%= posts[i].title %>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </body>
+</html>

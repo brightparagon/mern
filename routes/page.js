@@ -9,3 +9,7 @@ module.exports.signUp = function(req, res) {
 module.exports.signIn = function(req, res) {
   res.render('signin');
 };
+
+module.exports.index = function(req, res) {
+  res.render('index');
+};

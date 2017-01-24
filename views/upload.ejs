@@ -1,23 +1,10 @@
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Brigtparagon</title>
-    <link rel="shortcut icon" href="fav.png">
-    <link href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic" rel="stylesheet">
-    <link href="css/basic.css" rel="stylesheet">
+    <% include ./header.ejs %>
   </head>
   <body>
     <header>
-      <div class="nav">
-        <ul>
-          <li class="home"><a href="/">Home</a></li>
-          <li class="upload"><a href="/upload">Upload</a></li>
-          <li><a href="/signup">Sign Up</a></li>
-          <li><a href="/signin">Sign In</a></li>
-        </ul>
-      </div>
+      <% include ./navigation.ejs %>
     </header>
     <div align="center">
       <h2>Post an Article</h2>

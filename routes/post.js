@@ -4,7 +4,7 @@ var Post = mongoose.model('Post');
 module.exports.getPosts = function(req, res, next) {
   Post.find(function(err, posts) {
     if (err) return console.error(err);
-    res.render('index', {posts: posts});
+    res.render('list', {posts: posts});
   })
 };
 
