@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var passport = require('passport');
-// var jwt = require('jsonwebtoken');
 var User = mongoose.model('User');
 
 module.exports.createUser = function(req, res, next) {
@@ -14,8 +13,9 @@ module.exports.createUser = function(req, res, next) {
     // 여기서 로그인 유무 변수를 던져줘서 네비게이션을 통제
     var token;
     token = user.generateJwt();
-    var decoded = jwt.verify(req.headers.authorization, 'mernblog');
-    res.render('profile', {token: decoded});
+    // 토큰을 만들었지만 프론트 프레임워크가 없기 때문에 지금은 필요가 없다 -> 직접 user 전달
+    req.session.user = user;
+    res.redirect('profile');
   });
 };
 
@@ -28,7 +28,8 @@ module.exports.signIn = function(req, res, next) {
     }
     if(user){
       token = user.generateJwt();
-      res.render('profile', {token: token});
+      req.session.user = user;
+      res.redirect('profile');
     } else {
       res.status(401).json(info);
     }

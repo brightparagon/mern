@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var logger = require('morgan');
 var errorHandler = require('errorhandler');
@@ -17,12 +18,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.set('port', process.env.PORT || 3000);
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
+app.use(function(req, res, next) {
+  res.locals.user = req.session.user;
+  next();
+});
 app.use('/', routesApi);
 
 app.listen(app.get('port'), function() {
