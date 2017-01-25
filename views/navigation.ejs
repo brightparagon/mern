@@ -10,5 +10,8 @@
     <% if(signedUser) { %>
       <li><a href="/profile?userId=<%= signedUser._id %>"><%= signedUser.name %>님 로그인됨</a></li>
     <% } %>
+    <% if(signedUser) { %>
+      <li><a href="/signout">Sign Out</a></li>
+    <% } %>
   </ul>
 </div>

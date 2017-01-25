@@ -22,8 +22,9 @@ router.post('/post', ctrlPost.createPost); // create a post
 router.get('/post', ctrlPost.getPost); // retrieve a post
 
 // data for user
-router.post('/user', ctrlUser.createUser); // create a user
+router.post('/user', ctrlUser.createUser); // create an user
 router.post('/signin', ctrlUser.signIn); // sign in
-router.get('/profile', ctrlUser.profile);
+router.get('/signout', ctrlUser.signOut); // sign out
+router.get('/profile', ctrlUser.profile); // get an user
 
 module.exports = router;
