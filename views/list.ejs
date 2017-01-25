@@ -11,8 +11,13 @@
       <ul>
         <% for(var i=0; i<posts.length; i++) { %>
           <li>
+            제목:
             <a href='/post?postId=<%= posts[i]._id %>'>
                 <%= posts[i].title %>
+            </a>
+            글쓴이:
+            <a href='/profile?userId=<%= posts[i].author._id %>'>
+              <%= posts[i].author.name %>
             </a>
           </li>
         <% } %>

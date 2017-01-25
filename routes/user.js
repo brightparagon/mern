@@ -15,7 +15,7 @@ module.exports.createUser = function(req, res, next) {
     token = user.generateJwt();
     // 토큰을 만들었지만 프론트 프레임워크가 없기 때문에 지금은 필요가 없다 -> 직접 user 전달
     req.session.user = user;
-    res.redirect('profile');
+    res.render('profile', {user: req.session.user});
   });
 };
 
@@ -29,9 +29,16 @@ module.exports.signIn = function(req, res, next) {
     if(user){
       token = user.generateJwt();
       req.session.user = user;
-      res.redirect('profile');
+      res.render('profile', {user: req.session.user});
     } else {
       res.status(401).json(info);
     }
   })(req, res);
+};
+
+module.exports.profile = function(req, res, next) {
+  User.findById(req.query.userId).populate('posts').exec(function(err, user) {
+    if(err) return next(err);
+    res.render('profile', {user: user});
+  })
 };

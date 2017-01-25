@@ -14,6 +14,6 @@ module.exports.index = function(req, res) {
   res.render('index');
 };
 
-module.exports.profile = function(req, res) {
-  res.render('profile');
-};
+// module.exports.profile = function(req, res) {
+//   res.render('profile');
+// };

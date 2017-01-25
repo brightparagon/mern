@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(function(req, res, next) {
-  res.locals.user = req.session.user;
+  res.locals.signedUser = req.session.user;
   next();
 });
 app.use('/', routesApi);

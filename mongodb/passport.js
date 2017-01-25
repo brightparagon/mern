@@ -8,7 +8,21 @@ passport.use(new LocalStrategy({
   passwordField: 'password'
 },
 function(email, password, done) {
-    User.findOne({email: email}, function(err, user) {
+    // User.findOne({email: email}, function(err, user) {
+    //   if(err) { return done(err); }
+    //   if(!user) {
+    //     return done(null, false, {
+    //       message: 'User not found'
+    //     });
+    //   }
+    //   if(!user.validPassword(password)) {
+    //     return done(null, false, {
+    //       message: 'Password is wrong'
+    //     });
+    //   }
+    //   return done(null, user);
+    // });
+    User.findOne({email: email}).populate('posts').exec(function(err, user) {
       if(err) { return done(err); }
       if(!user) {
         return done(null, false, {

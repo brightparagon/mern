@@ -15,7 +15,6 @@ router.get('/upload', ctrlPage.upload);
 router.get('/signup', ctrlPage.signUp);
 router.get('/signin', ctrlPage.signIn);
 router.get('/', ctrlPage.index);
-router.get('/profile', ctrlPage.profile);
 
 // data for post
 router.get('/list', ctrlPost.getPosts); // posts list in index.ejs
@@ -23,7 +22,8 @@ router.post('/post', ctrlPost.createPost); // create a post
 router.get('/post', ctrlPost.getPost); // retrieve a post
 
 // data for user
-router.post('/user', ctrlUser.createUser);
-router.post('/signin', ctrlUser.signIn);
+router.post('/user', ctrlUser.createUser); // create a user
+router.post('/signin', ctrlUser.signIn); // sign in
+router.get('/profile', ctrlUser.profile);
 
 module.exports = router;

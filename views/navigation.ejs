@@ -3,12 +3,12 @@
     <li class="home"><a href="/">Home</a></li>
     <li class="upload"><a href="/upload">Upload</a></li>
     <li><a href="/list">List</a></li>
-    <% if(!user) { $>
+    <% if(!signedUser) { %>
       <li><a href="/signup">Sign Up</a></li>
       <li><a href="/signin">Sign In</a></li>
-    <% } $>
-    <% if(user) { %>
-      <li><a href="/profile"><%= user.name %>님 Signed In</a></li>
+    <% } %>
+    <% if(signedUser) { %>
+      <li><a href="/profile?userId=<%= signedUser._id %>"><%= signedUser.name %>님 로그인됨</a></li>
     <% } %>
   </ul>
 </div>
