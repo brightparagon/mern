@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <% include ./header.ejs %>
+  </head>
+  <body>
+    <header>
+      <% include ./navigation.ejs %>
+    </header>
+    <div align="center">
+      <h2>Update an Article</h2>
+      <div>
+        <form name="updateForm" action="/postUpdate?postId=<%= post._id %>" method="post">
+          <fieldset style="width:30%">
+            <legend>글 수정</legend>
+              제목 <br><input type="text" id="title" name="title" value="<%= post.title %>"/><br><br>
+              <legend>내용</legend>
+              <textarea rows="10" cols="40" id="content" name="content"><%= post.content %></textarea>
+          </fieldset>
+          <input type="submit" value="완료">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

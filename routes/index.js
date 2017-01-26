@@ -20,6 +20,9 @@ router.get('/', ctrlPage.index);
 router.get('/list', ctrlPost.getPosts); // posts list in index.ejs
 router.post('/post', ctrlPost.createPost); // create a post
 router.get('/post', ctrlPost.getPost); // retrieve a post
+router.get('/updatePost', ctrlPost.getUpdatePost); // move to update page
+router.post('/postUpdate', ctrlPost.updatePost); // update a post
+router.get('/postDelete', ctrlPost.deletePost); // delete a post
 
 // data for user
 router.post('/user', ctrlUser.createUser); // create an user

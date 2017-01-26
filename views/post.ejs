@@ -7,13 +7,23 @@
       <% include ./navigation.ejs %>
     </header>
     <div align="center">
-      <h2>Your Article</h2>
+      <h2>Article</h2>
       <div>
         <fieldset style = "width:30%">
           <legend><%= post.title %></legend>
             <br>
             <textarea rows="10" cols="40" name="content"><%= post.content %></textarea>
         </fieldset>
+        <% if(signedUser) { %>
+          <% if(signedUser._id == post.author._id) { %>
+            <a href="/updatePost?postId=<%= post._id %>">
+              <button type="button">수정하기</button>
+            </a>
+            <a href="/postDelete?postId=<%= post._id %>">
+              <input type="button" value="삭제하기">
+            </a>
+         <% } %>
+       <% } %>
       </div>
     </div>
   </body>
