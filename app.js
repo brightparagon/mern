@@ -1,19 +1,18 @@
-var express = require('express');
-var session = require('express-session');
-var path = require('path');
-var logger = require('morgan');
-var methodOverride = require('method-override');
-var errorHandler = require('errorhandler');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var passport = require('passport');
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
+const logger = require('morgan');
+const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const passport = require('passport');
 
 require('./mongodb/connection');
 require('./mongodb/passport');
-var routesApi = require('./routes/index');
+const routesApi = require('./routes/index');
 
-var app = express();
-app.locals.appTitle = "mern-blog";
+const app = express();
+app.locals.appTitle = 'mern-blog';
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -22,16 +21,16 @@ app.set('port', process.env.PORT || 3000);
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
 }));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
-app.use(function(req, res, next) {
+app.use(function d(req, res, next) {
   res.locals.signedUser = req.session.user;
   next();
 });

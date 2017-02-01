@@ -1,14 +1,14 @@
-var express = require('express');
-var jwt = require('express-jwt');
-var router = express.Router();
-var ctrlPost = require('./post');
-var ctrlUser = require('./user');
-var ctrlPage = require('./page');
+const express = require('express');
+// const jwt = require('express-jwt');
+const router = express.Router();
+const ctrlPost = require('./post');
+const ctrlUser = require('./user');
+const ctrlPage = require('./page');
 
-var auth = jwt({
-  secret: 'mernblog',
-  userProperty: 'payload'
-});
+// const auth = jwt({
+//   secret: 'mernblog',
+//   userProperty: 'payload'
+// });
 
 // pages
 router.get('/upload', ctrlPage.upload);
