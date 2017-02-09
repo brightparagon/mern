@@ -1,7 +1,9 @@
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
-const userSchema = new mongoose.Schema({
+import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
   email: String,
   name: String,
   facebook: String,
@@ -36,4 +38,4 @@ userSchema.methods.generateJwt = function() {
   }, 'mernblog');
 };
 
-module.exports = mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);

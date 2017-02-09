@@ -71,6 +71,9 @@ app.use(function (req, res, next) {
   next();
 });
 app.use('/', routesApi);
+app.get('*', function (req, res) {
+  res.sendFile(_path2.default.resolve(__dirname, './../public/index.html'));
+});
 
 app.listen(port, function () {
   console.log('Express is listening on port', port);

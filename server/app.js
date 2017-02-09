@@ -1,4 +1,6 @@
 import express from 'express';
+import webpack from 'webpack';
+import webpackDevServer from 'webpack-dev-server';
 import mongoose from 'mongoose';
 mongoose.Promise = global.Promise;
 import session from 'express-session';
@@ -9,7 +11,7 @@ import bodyParser from 'body-parser'; // PARSE HTML BODY
 import passport from 'passport';
 
 require('./passport');
-const routesApi = require('./routes/index');
+import routesApi from './routes';
 
 const app = express();
 const port = 3000;
@@ -34,13 +36,20 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));
+
+// public vs ./../public DIFFERENCE?
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, './../public')));
+
 app.use(passport.initialize());
 app.use(function(req, res, next) {
   res.locals.signedUser = req.session.user;
   next();
 });
-app.use('/', routesApi);
+app.use('/api', routesApi);
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './../public/index.html'));
+});
 
 app.listen(port, () => {
   console.log('Express is listening on port', port);
@@ -50,7 +59,7 @@ if(process.env.NODE_ENV == 'development') {
   console.log('Server is running on development mode');
   const config = require('../webpack.dev.config');
   const compiler = webpack(config);
-  const devServer = new WebpackDevServer(compiler, config.devServer);
+  const devServer = new webpackDevServer(compiler, config.devServer);
   devServer.listen(
     devPort, () => {
       console.log('webpack-dev-server is listening on port', devPort);

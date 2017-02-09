@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const passport = require('passport');
-const User = mongoose.model('User');
+import mongoose from 'mongoose';
+import passport from 'passport';
+import User from '../models/user';
 
 module.exports.createUser = function(req, res, next) {
   const user = new User();

@@ -31,4 +31,4 @@ router.post('/signin', ctrlUser.signIn); // sign in
 router.get('/signout', ctrlUser.signOut); // sign out
 router.get('/profile', ctrlUser.profile); // get an user
 
-module.exports = router;
+export default router;

@@ -1,6 +1,8 @@
-const mongoose = require('mongoose');
-const Post = mongoose.model('Post');
-const User = mongoose.model('User');
+import express from 'express';
+import mongoose from 'mongoose';
+import Post from '../models/post';
+import User from '../models/user';
+const router = express.Router();
 
 module.exports.getPosts = function(req, res, next) {
   Post.find().populate('author').exec(function(err, posts) {

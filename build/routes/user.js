@@ -1,11 +1,21 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var passport = require('passport');
-var User = mongoose.model('User');
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _passport = require('passport');
+
+var _passport2 = _interopRequireDefault(_passport);
+
+var _user = require('../models/user');
+
+var _user2 = _interopRequireDefault(_user);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports.createUser = function (req, res, next) {
-  var user = new User();
+  var user = new _user2.default();
   user.email = req.body.email;
   user.name = req.body.name;
   user.facebook = req.body.facebook;
@@ -23,7 +33,7 @@ module.exports.createUser = function (req, res, next) {
 };
 
 module.exports.signIn = function (req, res, next) {
-  passport.authenticate('local', function (err, user, info) {
+  _passport2.default.authenticate('local', function (err, user, info) {
     if (err) {
       res.status(404).json(err);
       return;
@@ -44,7 +54,7 @@ module.exports.signOut = function (req, res, next) {
 };
 
 module.exports.profile = function (req, res, next) {
-  User.findById(req.query.userId).populate('posts').exec(function (err, user) {
+  _user2.default.findById(req.query.userId).populate('posts').exec(function (err, user) {
     if (err) return next(err);
     res.render('profile', { user: user });
   });

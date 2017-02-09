@@ -1,7 +1,8 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
+import passport from 'passport';
+import passportLocal from 'passport-local';
+import mongoose from 'mongoose';
+import User from './models/user';
+const LocalStrategy = passportLocal.Strategy;
 
 passport.use(new LocalStrategy({
   usernameField: 'email',
