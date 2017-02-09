@@ -1,14 +1,23 @@
+const path = require('path');
+const webpack = require('webpack');
+
 module.exports = {
-  entry: './src/index.js',
+  entry: [
+    'babel-polyfill',
+    './src/index.js',
+  ],
+
   output: {
     path: __dirname + '/public/',
     filename: 'bundle.js',
   },
-  devServer: {
-    inline: true,
-    port: 7777,
-    contentBase: __dirname + '/public/',
-  },
+
+  // devServer: {
+  //   inline: true,
+  //   port: 7777,
+  //   contentBase: __dirname + '/public/',
+  // },
+
   module: {
     loaders: [
       {
@@ -22,4 +31,22 @@ module.exports = {
       },
     ],
   },
+
+  resolve: {
+        root: path.resolve('./src'),
+  },
+
+  plugins: [
+        new webpack.DefinePlugin( {
+          'process.env': {
+            'NODE_ENV': JSON.stringify('production'),
+          },
+        }),
+        new webpack.optimize.UglifyJsPlugin( {
+          compress: {
+            warnings: true,
+          },
+        }),
+    ],
+
 };

@@ -16,14 +16,8 @@
     "sourceType": "module"
   },
   "rules": {
-    "no-unused-vars": ["error", { "vars": "local", "args": "after-used" }],
-    "require-jsdoc": ["error", {
-        "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": false,
-            "ClassDeclaration": false,
-            "ArrowFunctionExpression": false
-        }
-    }]
+    "no-unused-vars": "off",
+    "require-jsdoc": "off",
+    "quotes": "off",
   }
 }
