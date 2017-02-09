@@ -19,5 +19,6 @@
     "no-unused-vars": "off",
     "require-jsdoc": "off",
     "quotes": "off",
+    "new-cap": "off",
   }
 }

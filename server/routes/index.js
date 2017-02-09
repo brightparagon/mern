@@ -1,9 +1,10 @@
-const express = require('express');
-// const jwt = require('express-jwt');
+import express from 'express';
+// const jwt from 'express-jwt';
+import ctrlPost from './post';
+import ctrlUser from './user';
+import ctrlPage from './page';
+
 const router = express.Router();
-const ctrlPost = require('./post');
-const ctrlUser = require('./user');
-const ctrlPage = require('./page');
 
 // const auth = jwt({
 //   secret: 'mernblog',

@@ -1,0 +1,87 @@
+'use strict';
+
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _expressSession = require('express-session');
+
+var _expressSession2 = _interopRequireDefault(_expressSession);
+
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
+var _morgan = require('morgan');
+
+var _morgan2 = _interopRequireDefault(_morgan);
+
+var _methodOverride = require('method-override');
+
+var _methodOverride2 = _interopRequireDefault(_methodOverride);
+
+var _bodyParser = require('body-parser');
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _passport = require('passport');
+
+var _passport2 = _interopRequireDefault(_passport);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_mongoose2.default.Promise = global.Promise; // HTTP REQUEST LOGGER
+// PARSE HTML BODY
+
+
+require('./passport');
+var routesApi = require('./routes/index');
+
+var app = (0, _express2.default)();
+var port = 3000;
+var devPort = 4000;
+app.locals.appTitle = 'mern-blog';
+
+/* mongodb connection */
+var db = _mongoose2.default.connection;
+db.on('error', console.error);
+db.once('open', function () {
+  console.log('Connected to mongodb server');
+});
+// mongoose.connect('mongodb://username:password@host:port/database=');
+_mongoose2.default.connect('mongodb://localhost/mernblog', { safe: true });
+
+app.use((0, _expressSession2.default)({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use((0, _morgan2.default)('dev'));
+app.use(_bodyParser2.default.json());
+app.use(_bodyParser2.default.urlencoded({ extended: true }));
+app.use((0, _methodOverride2.default)());
+app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));
+app.use(_passport2.default.initialize());
+app.use(function (req, res, next) {
+  res.locals.signedUser = req.session.user;
+  next();
+});
+app.use('/', routesApi);
+
+app.listen(port, function () {
+  console.log('Express is listening on port', port);
+});
+
+if (process.env.NODE_ENV == 'development') {
+  console.log('Server is running on development mode');
+  var config = require('../webpack.dev.config');
+  var compiler = webpack(config);
+  var devServer = new WebpackDevServer(compiler, config.devServer);
+  devServer.listen(devPort, function () {
+    console.log('webpack-dev-server is listening on port', devPort);
+  });
+}
