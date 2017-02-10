@@ -5,6 +5,7 @@ module.exports = {
   entry: [
     'babel-polyfill',
     './src/index.js',
+    './src/index.css',
   ],
 
   output: {
@@ -28,6 +29,10 @@ module.exports = {
           cacheDirectory: true,
           presets: ['es2015', 'react'],
         },
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
       },
     ],
   },
