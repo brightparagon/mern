@@ -1,22 +1,11 @@
 import React from 'react';
+import {Link} from 'react-router';
 import './Navigation.css';
 
 const Navigation = () => (
   <div className="Navigation">
-    <Button
-      color="teal"
-      content="Sign Up"
-      // onClick={
-      //   () => onClick('SIGNUP')
-      // }
-    />
-    <Button
-      color="teal"
-      content="Sign In"
-      // onClick={
-      //   () => onClick('SIGNIN')
-      // }
-    />
+    <a><Link to="/signup">Sign Up</Link></a>
+    <a><Link to="/signin">Sign In</Link></a>
   </div>
 );
 
