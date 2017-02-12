@@ -1,11 +1,11 @@
 import React from 'react';
-import {Navigation} from './components';
+import {NavigationContainer} from './containers';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <Navigation />
+        <NavigationContainer />
       </div>
     );
   }
