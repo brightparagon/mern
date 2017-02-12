@@ -10,8 +10,8 @@ class Navigation extends React.Component {
   render() {
     return(
       <div className="Navigation">
-        <a><Link to="/signup"> Sign Up </Link></a>
-        <a><Link to="/signin"> Sign In </Link></a>
+        <a><Link to="/user/signup"> Sign Up </Link></a>
+        <a><Link to="/user/signin"> Sign In </Link></a>
       </div>
     );
   }
