@@ -10,11 +10,11 @@ class Navigation extends React.Component {
   render() {
     return(
       <div className="Navigation">
-        <Link to="/user/signup">Sign Up</Link>
-        <Link to="/user/signin">Sign In</Link>
+        <span><Link to="/user/signup">Sign Up</Link></span>
+        <span><Link to="/user/signin">Sign In</Link></span>
       </div>
     );
   }
 }
-// <span>Sign Up</span>
+
 export default Navigation;
