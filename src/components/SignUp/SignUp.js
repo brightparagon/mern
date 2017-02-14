@@ -5,7 +5,8 @@ import {Link} from 'react-router';
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
-    // those three variables are changeable -> should be states not props
+    // those three variables are changeable -
+    // by setState()-> should be states not props
     this.state = {
       email: '',
       name: '',
@@ -21,14 +22,15 @@ class SignUp extends React.Component {
     this.setState(nextState);
   }
 
-  handleRegister() {
+  handleSignUp() {
     let email = this.state.email;
     let name = this.state.name;
     let password = this.state.password;
 
-    this.props.onRegister(email, name, password).then(
+    this.props.onSignUp(email, name, password).then(
       (success) => {
         if(!success) {
+          // 회원가입 실패하면 비밀번호 초기화
           this.setState({
             password: '',
           });
