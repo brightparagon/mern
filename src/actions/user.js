@@ -23,8 +23,9 @@ export function signupRequest(email, name, password) {
       .send({email, name, password})
       .end((err, res) => {
         // --> Update codes in the server <error codes>
-        if(err) dispatch(signupFail(error.response.data.code));
-        dispatch(signupSuccess(email));
+        // if(err) dispatch(signupFail(error.response.data.code));
+        if(err) dispatch(signupFail());
+        dispatch(signupSuccess());
       });
   };
 }
@@ -38,13 +39,21 @@ export function signup() {
 export function signupSuccess() {
   return {
     type: USER_SIGNUP_SUCCESS,
+    // 회원가입 이후 곧바로 로그인(세션 저장) 추후 구현
+    // email
   };
 }
 
-export function signupFail(error) {
+// export function signupFail(error) {
+//   return {
+//     type: USER_SIGNUP_FAIL,
+//     error,
+//   };
+// }
+
+export function signupFail() {
   return {
-    type: AUTH_REGISTER_FAILURE,
-    error,
+    type: USER_SIGNUP_FAIL,
   };
 }
 
@@ -58,7 +67,7 @@ export function signinRequest(email, password) {
       .send({email, password})
       .end((err, res) => {
         if(err) dispatch(signinFail());
-        dispatch(loginSuccess(email));
+        dispatch(signinSuccess(email));
       });
   };
 }
