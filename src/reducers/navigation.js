@@ -7,7 +7,8 @@ const initialState = {
   },
   signup: {
     status: 'INIT',
-    error: -1,
+    // server에 error codes 구현한 뒤 사용
+    // error: -1,
   },
   status: {
     valid: false,
@@ -51,7 +52,20 @@ export default function navigation(state, action) {
       return update(state, {
         signup: {
           status: {$set: 'WAITING'},
-          error: {$set: -1},
+          // error: {$set: -1},
+        },
+      });
+    case types.USER_SIGNUP_SUCCESS:
+      return update(state, {
+        signup: {
+          status: {$set: 'SUCCESS'},
+        },
+      });
+    case types.USER_SIGNUP_FAIL:
+      return update(state, {
+        signup: {
+          status: {$set: 'FAIL'},
+          // error: {$set: action.error},
         },
       });
 
