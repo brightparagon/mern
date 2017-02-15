@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
-import {SignUpContainer} from './containers';
+import {SignUpContainer, SignInContainer} from './containers';
 import App from './App';
 import './index.css';
 
@@ -19,6 +19,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={SignUpContainer}/>
         <Route path="user/signup" component={SignUpContainer}/>
+        <Route path="user/signin" component={SignInContainer}/>
       </Route>
     </Router>
   </Provider>, rootElement
