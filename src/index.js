@@ -17,6 +17,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
+        <IndexRoute component={SignUpContainer}/>
         <Route path="user/signup" component={SignUpContainer}/>
       </Route>
     </Router>

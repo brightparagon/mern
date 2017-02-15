@@ -1,7 +1,7 @@
 import React from 'react';
 import {Navigation} from '../components';
 import {connect} from 'react-redux';
-import {signoutRequest} from '../actions/user';
+import {signinRequest} from '../actions/user';
 
 class NavigationContainer extends React.Component {
   constructor(props) {
@@ -26,8 +26,8 @@ const mapStateToProps = (state) => {
 // MATCH DISPATCH FUNCS OF ACTIONS TO THIS.PROPS
 const mapDispatchToProps = (dispatch) => {
   return {
-    signoutRequest: () => {
-      return dispatch(signoutRequest());
+    signinRequest: (email, password) => {
+      return dispatch(signinRequest(email, password));
     },
   };
 };
