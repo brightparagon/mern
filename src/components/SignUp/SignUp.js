@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-// import './SignUp.css';
+import './SignUp.css';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class SignUp extends React.Component {
 
   render() {
     const inputBoxes = (
-      <div>
+      <div className="InputBoxes">
         <div className="Email">
           <label>Email</label>
           <input
@@ -62,7 +62,7 @@ class SignUp extends React.Component {
             onChange={this.handleChange}
           />
         </div>
-        <div className="input-field col s12">
+        <div className="Password">
           <label>Password</label>
           <input
             name="password"
