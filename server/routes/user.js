@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
+import express from 'express';
 import passport from 'passport';
 import User from '../models/user';
+const router = express.Router();
 
 /*
     ACCOUNT SIGNUP: POST /api/user/signup
@@ -59,30 +60,33 @@ router.post('/signup', (req, res) => {
   });
 });
 
-module.exports.signIn = function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if(err) {
-      res.status(404).json(err);
-      return;
-    }
-    if(user) {
-      const token = user.generateJwt();
-      req.session.user = user;
-      res.render('profile', {user: req.session.user});
-    } else {
-      res.status(401).json(info);
-    }
-  })(req, res);
-};
+// module.exports.signIn = function(req, res, next) {
+//   passport.authenticate('local', function(err, user, info) {
+//     if(err) {
+//       res.status(404).json(err);
+//       return;
+//     }
+//     if(user) {
+//       const token = user.generateJwt();
+//       req.session.user = user;
+//       res.render('profile', {user: req.session.user});
+//     } else {
+//       res.status(401).json(info);
+//     }
+//   })(req, res);
+// };
+//
+// module.exports.signOut = function(req, res, next) {
+//   delete req.session.user;
+//   res.redirect('/');
+// };
+//
+// module.exports.profile = function(req, res, next) {
+//   User.findById(req.query.userId).populate('posts')
+//    .exec(function(err, user) {
+//     if(err) return next(err);
+//     res.render('profile', {user: user});
+//   });
+// };
 
-module.exports.signOut = function(req, res, next) {
-  delete req.session.user;
-  res.redirect('/');
-};
-
-module.exports.profile = function(req, res, next) {
-  User.findById(req.query.userId).populate('posts').exec(function(err, user) {
-    if(err) return next(err);
-    res.render('profile', {user: user});
-  });
-};
+export default router;

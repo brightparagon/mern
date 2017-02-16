@@ -55,10 +55,10 @@ class SignUp extends React.Component {
         <div className="Name">
           <label>Name</label>
           <input
-            name="email"
+            name="name"
             type="text"
             className="validate"
-            value={this.state.email}
+            value={this.state.name}
             onChange={this.handleChange}
           />
         </div>
