@@ -7,6 +7,8 @@ import {
     USER_GET_STATUS_FAIL,
     USER_SIGNOUT,
     USER_SIGNUP,
+    USER_SIGNUP_SUCCESS,
+    USER_SIGNUP_FAIL,
     USER_UPDATE,
     USER_WITHDRAW,
 } from './ActionTypes';
@@ -21,11 +23,16 @@ export function signupRequest(email, name, password) {
     return request
       .post('/api/user/signup')
       .send({email, name, password})
-      .end((err, res) => {
-        // --> Update codes in the server <error codes>
-        // if(err) dispatch(signupFail(error.response.data.code));
-        if(err) dispatch(signupFail());
+      // .end((err, res) => {
+      //   // --> Update codes in the server <error codes>
+      //   // if(err) dispatch(signupFail(error.response.data.code));
+      //   if(err) dispatch(signupFail());
+      //   dispatch(signupSuccess());
+      // });
+      .then((reponse) => {
         dispatch(signupSuccess());
+      }).catch((error) => {
+        dispatch(signupFail());
       });
   };
 }
