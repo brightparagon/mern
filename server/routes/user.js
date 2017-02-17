@@ -4,12 +4,16 @@ import User from '../models/user';
 const router = express.Router();
 
 /*
-    ACCOUNT SIGNUP: POST /api/user/signup
-    BODY SAMPLE: { "username": "test", "password": "test" }
+    ACCOUNT SIGN UP: POST /api/user/signup
+    BODY SAMPLE: {
+      "email": "test",
+      "name": "test",
+      "password": "test",
+    }
     ERROR CODES:
-        1: BAD USERNAME
-        2: BAD PASSWORD
-        3: USERNAM EXISTS
+      1: BAD USERNAME
+      2: BAD PASSWORD
+      3: USERNAME EXISTS
 */
 router.post('/signup', (req, res) => {
   // CHECK USERNAME FORMAT
@@ -58,6 +62,46 @@ router.post('/signup', (req, res) => {
       // res.render('profile', {user: req.session.user});
     });
   });
+});
+
+/*
+    ACCOUNT SIGN IN: POST /api/user/signin
+    BODY SAMPLE: {
+      "email": "test",
+      "password": "test",
+    }
+    ERROR CODES:
+      1: SIGN IN FAILED
+*/
+router.post('/signin', (req, res) => {
+  if(typeof req.body.password !== 'string') {
+    return res.status(401).json({
+      error: 'LOGIN FAILED',
+      code: 1,
+    });
+  }
+
+  passport.authenticate('local', function(err, user, info) {
+    if(err) {
+      res.status(404).json(err);
+      return;
+    }
+    if(user) {
+      // const token = user.generateJwt();
+      // req.session.user = user;
+      req.session.signinInfo = {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+      };
+
+      return res.json({
+        success: true,
+      });
+    } else {
+      res.status(401).json(info);
+    }
+  })(req, res);
 });
 
 // module.exports.signIn = function(req, res, next) {

@@ -14,7 +14,7 @@ import {
 } from './ActionTypes';
 import request from 'superagent';
 
-// DISPATCH FOR SIGN UP
+// DISPATCHER FOR SIGN UP
 export function signupRequest(email, name, password) {
   return (dispatch) => {
     // set status
@@ -65,7 +65,7 @@ export function signupFail() {
   };
 }
 
-// DISPATCH FOR SIGN IN
+// DISPATCHER FOR SIGN IN
 export function signinRequest(email, password) {
   return (dispatch) => {
     // set status
@@ -73,8 +73,8 @@ export function signinRequest(email, password) {
     return request
       .post('/api/user/signin')
       .send({email, password})
-      .then((reponse) => {
-        dispatch(signinSuccess());
+      .then((reponse) => { // response가 server에서 전달된 결과를 갖고 있음
+        dispatch(signinSuccess(email));
       }).catch((error) => {
         dispatch(signinFail());
       });
