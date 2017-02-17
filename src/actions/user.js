@@ -1,20 +1,20 @@
 import {
-    USER_SIGNIN,
-    USER_SIGNIN_SUCCESS,
-    USER_SIGNIN_FAIL,
-    USER_GET_STATUS,
-    USER_GET_STATUS_SUCCESS,
-    USER_GET_STATUS_FAIL,
-    USER_SIGNOUT,
-    USER_SIGNUP,
-    USER_SIGNUP_SUCCESS,
-    USER_SIGNUP_FAIL,
-    USER_UPDATE,
-    USER_WITHDRAW,
+  USER_SIGNUP,
+  USER_SIGNUP_SUCCESS,
+  USER_SIGNUP_FAIL,
+  USER_SIGNIN,
+  USER_SIGNIN_SUCCESS,
+  USER_SIGNIN_FAIL,
+  USER_GET_STATUS,
+  USER_GET_STATUS_SUCCESS,
+  USER_GET_STATUS_FAIL,
+  USER_SIGNOUT,
+  USER_UPDATE,
+  USER_WITHDRAW,
 } from './ActionTypes';
 import request from 'superagent';
 
-// SIGN UP
+// DISPATCH FOR SIGN UP
 export function signupRequest(email, name, password) {
   return (dispatch) => {
     // set status
@@ -26,9 +26,10 @@ export function signupRequest(email, name, password) {
       // .end((err, res) => {
       //   // --> Update codes in the server <error codes>
       //   // if(err) dispatch(signupFail(error.response.data.code));
-      //   if(err) dispatch(signupFail());
+      //   if(err) return dispatch(signupFail());
       //   dispatch(signupSuccess());
       // });
+      // superagent의 .end는 가장 마지막에 실행되는 Promise이다(.then 보다도 더).
       .then((reponse) => {
         dispatch(signupSuccess());
       }).catch((error) => {
@@ -64,7 +65,7 @@ export function signupFail() {
   };
 }
 
-// SIGN IN
+// DISPATCH FOR SIGN IN
 export function signinRequest(email, password) {
   return (dispatch) => {
     // set status
@@ -72,9 +73,10 @@ export function signinRequest(email, password) {
     return request
       .post('/api/user/signin')
       .send({email, password})
-      .end((err, res) => {
-        if(err) dispatch(signinFail());
-        dispatch(signinSuccess(email));
+      .then((reponse) => {
+        dispatch(signinSuccess());
+      }).catch((error) => {
+        dispatch(signinFail());
       });
   };
 }

@@ -13,11 +13,12 @@ class SignInContainer extends React.Component {
     return this.props.signinRequest(email, password).then(
       () => {
         if(this.props.status === "SUCCESS") {
-          console.log('Sign In Success!');
+          alert('Hello! ' + this.props.currentUser); // String Interpolation
           browserHistory.push('/');
           return true;
         } else {
-          console.log('Sign In Fail');
+          // error codes 이용해서 알러트 띄우기
+          alert('Sign In Fail');
           return false;
         }
       }
@@ -35,6 +36,7 @@ class SignInContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     status: state.navigation.signin.status,
+    currentUser: state.navigation.status.currentUser,
   };
 };
 

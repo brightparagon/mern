@@ -14,7 +14,7 @@ class SignUpContainer extends React.Component {
     return this.props.signupRequest(email, name, password).then(
       () => {
         if(this.props.status === "SUCCESS") {
-          console.log('Sign Up Success!');
+          alert('Sign Up Success!');
           browserHistory.push('/user/signin');
           return true;
         } else {
@@ -29,7 +29,7 @@ class SignUpContainer extends React.Component {
         //    'Password is too short',
         //    'Username already exists'
         //  ];
-          console.log('Sign Up Fail');
+          alert('Sign Up Fail');
           return false;
         }
       }
