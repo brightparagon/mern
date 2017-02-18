@@ -1,6 +1,7 @@
 import React from 'react';
-import {SignIn} from '../components';
+import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
+import {SignIn} from '../components';
 import {signinRequest} from '../actions/user';
 
 class SignInContainer extends React.Component {

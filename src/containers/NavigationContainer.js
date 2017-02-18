@@ -10,7 +10,7 @@ class NavigationContainer extends React.Component {
 
   render() {
     return(
-      <Navigation />
+      <Navigation status={status}/>
     );
   }
 }
@@ -18,7 +18,7 @@ class NavigationContainer extends React.Component {
 // GET STATE FROM STORE(REDUCERS) AND MATCH IT TO THIS.PROPS
 const mapStateToProps = (state) => {
   return {
-    status: state.navigation.signin.status,
+    status: state.navigation.status,
   };
 };
 

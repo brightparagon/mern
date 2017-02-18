@@ -9,7 +9,8 @@ passport.use(new LocalStrategy({
   passwordField: 'password',
 },
   function(email, password, done) {
-    User.findOne({email: email}).populate('posts').exec(function(err, user) {
+    // User.findOne({email: email}).populate('posts').exec(function(err, user) {
+    User.findOne({email: email}).exec(function(err, user) {
       if(err) return done(err);
       if(!user) {
         return done(null, false, {

@@ -24,7 +24,8 @@ _passport2.default.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password'
 }, function (email, password, done) {
-  _user2.default.findOne({ email: email }).populate('posts').exec(function (err, user) {
+  // User.findOne({email: email}).populate('posts').exec(function(err, user) {
+  _user2.default.findOne({ email: email }).exec(function (err, user) {
     if (err) return done(err);
     if (!user) {
       return done(null, false, {

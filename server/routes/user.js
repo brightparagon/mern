@@ -95,6 +95,7 @@ router.post('/signin', (req, res) => {
         name: user.name,
       };
 
+      // token을 쓰게 되면 token을 반환하면 된다
       return res.json({
         success: true,
       });
@@ -104,22 +105,6 @@ router.post('/signin', (req, res) => {
   })(req, res);
 });
 
-// module.exports.signIn = function(req, res, next) {
-//   passport.authenticate('local', function(err, user, info) {
-//     if(err) {
-//       res.status(404).json(err);
-//       return;
-//     }
-//     if(user) {
-//       const token = user.generateJwt();
-//       req.session.user = user;
-//       res.render('profile', {user: req.session.user});
-//     } else {
-//       res.status(401).json(info);
-//     }
-//   })(req, res);
-// };
-//
 // module.exports.signOut = function(req, res, next) {
 //   delete req.session.user;
 //   res.redirect('/');

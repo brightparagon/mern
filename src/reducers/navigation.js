@@ -23,6 +23,28 @@ export default function navigation(state, action) {
   }
 
   switch(action.type) {
+    // SIGN UP
+    case types.USER_SIGNUP:
+      return update(state, {
+        signup: {
+          status: {$set: 'WAITING'},
+          // error: {$set: -1},
+        },
+      });
+    case types.USER_SIGNUP_SUCCESS:
+      return update(state, {
+        signup: {
+          status: {$set: 'SUCCESS'},
+        },
+      });
+    case types.USER_SIGNUP_FAIL:
+      return update(state, {
+        signup: {
+          status: {$set: 'FAIL'},
+          // error: {$set: action.error},
+        },
+      });
+
     // SIGN IN
     case types.USER_SIGNIN:
       return update(state, {
@@ -47,25 +69,12 @@ export default function navigation(state, action) {
         },
       });
 
-    // SIGN UP
-    case types.USER_SIGNUP:
+    // SIGN OUT
+    case types.USER_LOGOUT:
       return update(state, {
-        signup: {
-          status: {$set: 'WAITING'},
-          // error: {$set: -1},
-        },
-      });
-    case types.USER_SIGNUP_SUCCESS:
-      return update(state, {
-        signup: {
-          status: {$set: 'SUCCESS'},
-        },
-      });
-    case types.USER_SIGNUP_FAIL:
-      return update(state, {
-        signup: {
-          status: {$set: 'FAIL'},
-          // error: {$set: action.error},
+        status: {
+          isSignedIn: {$set: false},
+          currentUser: {$set: ''},
         },
       });
 
@@ -91,14 +100,6 @@ export default function navigation(state, action) {
         },
       });
 
-    // SIGN OUT
-    case types.USER_LOGOUT:
-      return update(state, {
-        status: {
-          isSignedIn: {$set: false},
-          currentUser: {$set: ''},
-        },
-      });
     default:
       return state;
   }

@@ -14,7 +14,7 @@ class SignUpContainer extends React.Component {
     return this.props.signupRequest(email, name, password).then(
       () => {
         if(this.props.status === "SUCCESS") {
-          alert('Sign Up Success!');
+          alert('Sign Up Success! Sign In here.');
           browserHistory.push('/user/signin');
           return true;
         } else {
