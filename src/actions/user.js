@@ -74,7 +74,7 @@ export function signinRequest(email, password) {
       .post('/api/user/signin')
       .send({email, password})
       .then((reponse) => { // response가 server에서 전달된 결과를 갖고 있음
-        dispatch(signinSuccess(email));
+        dispatch(signinSuccess(response.token));
       }).catch((error) => {
         dispatch(signinFail());
       });
@@ -87,10 +87,10 @@ export function signin() {
   };
 }
 
-export function signinSuccess(email) {
+export function signinSuccess(token) {
   return {
     type: USER_SIGNIN_SUCCESS,
-    email,
+    token,
   };
 }
 
