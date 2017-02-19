@@ -87,17 +87,16 @@ router.post('/signin', (req, res) => {
       return;
     }
     if(user) {
-      // const token = user.generateJwt();
-      // req.session.user = user;
-      req.session.signinInfo = {
-        _id: user._id,
-        email: user.email,
-        name: user.name,
-      };
+      const token = user.generateJwt();
+      // req.session.signinInfo = {
+      //   _id: user._id,
+      //   email: user.email,
+      //   name: user.name,
+      // };
 
       // token을 쓰게 되면 token을 반환하면 된다
       return res.json({
-        success: true,
+        token: token,
       });
     } else {
       res.status(401).json(info);
