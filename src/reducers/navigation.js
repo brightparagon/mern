@@ -11,9 +11,9 @@ const initialState = {
     // error: -1,
   },
   status: {
-    valid: false,
+    valid: false, // 언제 어디서 쓰이는지?
     isSignedIn: false,
-    currentUser: '',
+    token: null,
   },
 };
 
@@ -59,7 +59,7 @@ export default function navigation(state, action) {
         },
         status: {
           isSignedIn: {$set: true},
-          currentUser: {$set: action.email},
+          token: {$set: action.token},
         },
       });
     case types.USER_SIGNIN_FAIL:
