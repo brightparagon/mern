@@ -74,7 +74,9 @@ export function signinRequest(email, password) {
       .post('/api/user/signin')
       .send({email, password})
       .then((reponse) => { // response가 server에서 전달된 결과를 갖고 있음
-        dispatch(signinSuccess(response.token));
+        let processedToken = response.token.split(.)[1];
+        processedToken = JSON.parse(atob(processedToken));
+        dispatch(signinSuccess(processedToken));
       }).catch((error) => {
         dispatch(signinFail());
       });
