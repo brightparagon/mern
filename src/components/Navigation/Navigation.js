@@ -17,16 +17,18 @@ class Navigation extends React.Component {
   }
 
   render() {
-    const signedOut = (
+    const wasSignedOut = (
       <div>
         <span><Link to="/user/signup">Sign Up</Link></span>
         <span><Link to="/user/signin">Sign In</Link></span>
       </div>
     );
 
-    const signedIn = (
+    const wasSignedIn = (
       <div>
-        <span><Link to="/user/:userId/profile">Profile</Link></span>
+        <span><Link to="/user/:userId/profile">
+          Profile: {this.props.status.token.name}
+        </Link></span>
         <span><Link to="/post/write">Write</Link></span>
         <a onClick={this.handleSignOut}>SIGN OUT</a>
       </div>
@@ -35,7 +37,7 @@ class Navigation extends React.Component {
     return(
       <div className="Navigation">
         <span><Link to="/">Home</Link></span>
-        {this.props.status.isSignedIn ? signedIn : signedOut}
+        {this.props.status.isSignedIn ? wasSignedIn : wasSignedOut}
       </div>
     );
   }
@@ -50,7 +52,12 @@ Navigation.defaultProps = {
   status: {
     valid: false,
     isSignedIn: false,
-    currentUser: '',
+    token: {
+      _id: '',
+      email: '',
+      name: '',
+      exp: 0,
+    },
   },
   onSignOut: () => {
     console.error('onSignOut not defined');

@@ -4,6 +4,7 @@ import update from 'react-addons-update';
 const initialState = {
   signin: {
     status: 'INIT',
+    failReason: '',
   },
   signup: {
     status: 'INIT',
@@ -13,7 +14,12 @@ const initialState = {
   status: {
     valid: false, // 언제 어디서 쓰이는지?
     isSignedIn: false,
-    token: null,
+    token: {
+      _id: '',
+      email: '',
+      name: '',
+      exp: 0,
+    },
   },
 };
 
@@ -66,6 +72,7 @@ export default function navigation(state, action) {
       return update(state, {
         signin: {
           status: {$set: 'FAILURE'},
+          failReason: {$set: action.failReason},
         },
       });
 

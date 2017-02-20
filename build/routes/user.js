@@ -72,7 +72,7 @@ router.post('/signup', function (req, res) {
     user.save(function (err, user) {
       if (err) throw err;
       // 여기서 로그인 유무 변수를 던져줘서 네비게이션을 통제
-      var token = user.generateJwt();
+      // let token = user.generateJwt();
       // 토큰을 만들었지만 프론트 프레임워크가 없기 때문에 지금은 필요가 없다 -> 직접 user 전달
       req.session.user = user;
       return res.json({ success: true });
@@ -92,32 +92,33 @@ router.post('/signup', function (req, res) {
 */
 router.post('/signin', function (req, res) {
   if (typeof req.body.password !== 'string') {
-    return res.status(401).json({
-      error: 'LOGIN FAILED',
-      code: 1
+    return res.status(400).json({
+      failReason: 'Password you put is not characters.'
     });
   }
-
+  console.log('before authenticate in server');
   _passport2.default.authenticate('local', function (err, user, info) {
     if (err) {
-      res.status(404).json(err);
-      return;
+      return res.status(400).json({
+        failReason: 'err authenticate in server ' + err
+      });
     }
     if (user) {
-      // const token = user.generateJwt();
-      // req.session.user = user;
-      req.session.signinInfo = {
-        _id: user._id,
-        email: user.email,
-        name: user.name
-      };
+      var token = user.generateJwt();
+      // req.session.signinInfo = {
+      //   _id: user._id,
+      //   email: user.email,
+      //   name: user.name,
+      // };
 
       // token을 쓰게 되면 token을 반환하면 된다
       return res.json({
-        success: true
+        token: token
       });
     } else {
-      res.status(401).json(info);
+      res.status(400).json({
+        failReason: 'info authenticate in server ' + info.message
+      });
     }
   })(req, res);
 });

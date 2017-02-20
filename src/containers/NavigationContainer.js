@@ -10,7 +10,7 @@ class NavigationContainer extends React.Component {
 
   render() {
     return(
-      <Navigation status={status}/>
+      <Navigation status={this.props.status}/>
     );
   }
 }
@@ -26,6 +26,7 @@ const mapStateToProps = (state) => {
 // MATCH DISPATCH FUNCS OF ACTIONS TO THIS.PROPS
 const mapDispatchToProps = (dispatch) => {
   return {
+    // not need now
     signinRequest: (email, password) => {
       return dispatch(signinRequest(email, password));
     },

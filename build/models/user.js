@@ -23,7 +23,6 @@ var Schema = _mongoose2.default.Schema;
 var userSchema = new Schema({
   email: String,
   name: String,
-  facebook: String,
   hash: String,
   salt: String,
   posts: [{
@@ -43,14 +42,13 @@ userSchema.methods.validPassword = function (password) {
 };
 
 userSchema.methods.generateJwt = function () {
-  // 이 generateJwt 함수는 회원가입 이후 그리고 로그인 이후에 인증된 사용자 정보를 token을 만들어 여기에 담는 역할을 한다
+  // 이 generateJwt 함수는 회원가입 그리고 로그인 이후에 인증된 사용자 정보를 token을 만들어 여기에 담는 역할을 한다
   var expiry = new Date();
-  expiry.setDate(expiry.getDate() + 7);
+  expiry.setDate(expiry.getDate() + 7); // 현재 시점 기준으로 일주일간 유효
   return _jsonwebtoken2.default.sign({
     _id: this._id,
     email: this.email,
     name: this.name,
-    facebook: this.facebook,
     exp: parseInt(expiry.getTime() / 1000)
   }, 'mernblog');
 };

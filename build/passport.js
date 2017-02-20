@@ -28,6 +28,8 @@ _passport2.default.use(new LocalStrategy({
   _user2.default.findOne({ email: email }).exec(function (err, user) {
     if (err) return done(err);
     if (!user) {
+      // 처번째 인자가 err
+      // 세번째 인자가 info
       return done(null, false, {
         message: 'User not found'
       });

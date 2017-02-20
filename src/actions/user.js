@@ -30,7 +30,7 @@ export function signupRequest(email, name, password) {
       //   dispatch(signupSuccess());
       // });
       // superagent의 .end는 가장 마지막에 실행되는 Promise이다(.then 보다도 더).
-      .then((reponse) => {
+      .then((response) => {
         dispatch(signupSuccess());
       }).catch((error) => {
         dispatch(signupFail());
@@ -72,13 +72,18 @@ export function signinRequest(email, password) {
     dispatch(signin());
     return request
       .post('/api/user/signin')
-      .send({email, password})
-      .then((reponse) => { // response가 server에서 전달된 결과를 갖고 있음
-        let processedToken = response.token.split(.)[1];
+      .send({
+        email: email,
+        password: password,
+      })
+      .then((response) => { // response가 server에서 전달된 결과를 갖고 있음
+        // response 객체 구조를 모르겠으면 console.log로 뜯어보면 된다
+        // response.data가 없어서 찾아보니 response.body.token으로 전달되었음
+        let processedToken = response.body.token.split('.')[1];
         processedToken = JSON.parse(atob(processedToken));
         dispatch(signinSuccess(processedToken));
       }).catch((error) => {
-        dispatch(signinFail());
+        dispatch(signinFail(error));
       });
   };
 }
@@ -96,8 +101,9 @@ export function signinSuccess(token) {
   };
 }
 
-export function signinFail() {
+export function signinFail(failReason) {
   return {
     type: USER_SIGNIN_FAIL,
+    failReason,
   };
 }
