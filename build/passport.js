@@ -30,12 +30,12 @@ _passport2.default.use(new LocalStrategy({
     if (!user) {
       // 처번째 인자가 err
       // 세번째 인자가 info
-      return done(null, false, {
+      return done(null, null, {
         message: 'User not found'
       });
     }
     if (!user.validPassword(password)) {
-      return done(null, false, {
+      return done(null, null, {
         message: 'Password is wrong'
       });
     }

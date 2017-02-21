@@ -83,6 +83,8 @@ export function signinRequest(email, password) {
         processedToken = JSON.parse(atob(processedToken));
         dispatch(signinSuccess(processedToken));
       }).catch((error) => {
+        // 어떻게 서버에서 보낸 에러 메시지를 error object에서 받는가..?
+        console.log(error);
         dispatch(signinFail(error));
       });
   };

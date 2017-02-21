@@ -92,31 +92,24 @@ router.post('/signup', function (req, res) {
 */
 router.post('/signin', function (req, res) {
   if (typeof req.body.password !== 'string') {
-    return res.status(400).json({
+    return res.status(401).send({
       failReason: 'Password you put is not characters.'
     });
   }
-  console.log('before authenticate in server');
+
   _passport2.default.authenticate('local', function (err, user, info) {
     if (err) {
-      return res.status(400).json({
+      return res.status(401).send({
         failReason: 'err authenticate in server ' + err
       });
     }
     if (user) {
       var token = user.generateJwt();
-      // req.session.signinInfo = {
-      //   _id: user._id,
-      //   email: user.email,
-      //   name: user.name,
-      // };
-
-      // token을 쓰게 되면 token을 반환하면 된다
       return res.json({
         token: token
       });
     } else {
-      res.status(400).json({
+      res.status(401).send({
         failReason: 'info authenticate in server ' + info.message
       });
     }
