@@ -9,11 +9,7 @@ class Navigation extends React.Component {
   }
 
   handleSignOut() {
-    this.props.onSignOut().then(
-      (success) => {
-        alert('You are signed out successfully.');
-      }
-    );
+    this.props.onSignOut();
   }
 
   render() {
@@ -30,7 +26,7 @@ class Navigation extends React.Component {
           Profile: {this.props.status.token.name}
         </Link></span>
         <span><Link to="/post/write">Write</Link></span>
-        <a onClick={this.handleSignOut}>SIGN OUT</a>
+        <a onClick={this.handleSignOut}>Sign Out</a>
       </div>
     );
 

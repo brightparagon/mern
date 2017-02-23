@@ -1,16 +1,23 @@
 import React from 'react';
 import {Navigation} from '../components';
 import {connect} from 'react-redux';
-import {signinRequest} from '../actions/user';
+import {signoutRequest} from '../actions/user';
 
 class NavigationContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.handleSignOut = this.handleSignOut.bind(this);
+  }
+
+  handleSignOut() {
+    this.props.signoutRequest();
+    alert('You are signed out successfully.');
   }
 
   render() {
     return(
-      <Navigation status={this.props.status}/>
+      <Navigation status={this.props.status}
+        onSignOut={this.handleSignOut}/>
     );
   }
 }
@@ -22,13 +29,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-// NOT USED HERE YET
 // MATCH DISPATCH FUNCS OF ACTIONS TO THIS.PROPS
 const mapDispatchToProps = (dispatch) => {
   return {
-    // not need now
-    signinRequest: (email, password) => {
-      return dispatch(signinRequest(email, password));
+    signoutRequest: () => {
+      return dispatch(signoutRequest());
     },
   };
 };

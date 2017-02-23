@@ -109,3 +109,16 @@ export function signinFail(failReason) {
     failReason,
   };
 }
+
+// DISPATCHER FOR SIGN OUT
+export function signoutRequest() {
+  return (dispatch) => {
+    dispatch(signout());
+  };
+}
+
+export function signout() {
+  return {
+    type: USER_SIGNOUT,
+  };
+}

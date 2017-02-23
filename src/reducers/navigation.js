@@ -77,11 +77,11 @@ export default function navigation(state, action) {
       });
 
     // SIGN OUT
-    case types.USER_LOGOUT:
+    case types.USER_SIGNOUT:
       return update(state, {
         status: {
           isSignedIn: {$set: false},
-          currentUser: {$set: ''},
+          token: {$set: {}},
         },
       });
 

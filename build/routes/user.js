@@ -71,10 +71,6 @@ router.post('/signup', function (req, res) {
     // SAVE IN THE DATABASE
     user.save(function (err, user) {
       if (err) throw err;
-      // 여기서 로그인 유무 변수를 던져줘서 네비게이션을 통제
-      // let token = user.generateJwt();
-      // 토큰을 만들었지만 프론트 프레임워크가 없기 때문에 지금은 필요가 없다 -> 직접 user 전달
-      req.session.user = user;
       return res.json({ success: true });
       // res.render('profile', {user: req.session.user});
     });
