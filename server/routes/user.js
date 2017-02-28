@@ -89,7 +89,7 @@ router.post('/signin', (req, res) => {
       });
     } else {
       res.status(401).send({
-        failReason: 'info authenticate in server ' + info.message,
+        failReason: 'info authenticate in server ' + info,
       });
     }
   })(req, res);

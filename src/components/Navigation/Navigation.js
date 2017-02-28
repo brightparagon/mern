@@ -1,11 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {Button, Menu} from 'semantic-ui-react';
 import './Navigation.css';
 
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
     this.handleSignOut = this.handleSignOut.bind(this);
+    this.handleItemClick = this.handleItemClick.bind(this);
+    this.state = {
+      // initially chosen nav item: home
+      activeItem: 'home',
+    };
+  }
+
+  handleItemClick(e, {name}) {
+    this.setState({activeItem: name});
   }
 
   handleSignOut() {
@@ -13,26 +23,50 @@ class Navigation extends React.Component {
   }
 
   render() {
+    let {activeItem} = this.state;
+    let isSignedIn = this.props.status.isSignedIn;
+
     const wasSignedOut = (
       <div>
-        <span><Link to="/user/signup">Sign Up</Link></span>
-        <span><Link to="/user/signin">Sign In</Link></span>
+      <Menu size='large'>
+        <Menu.Item name='home' active={activeItem === 'home'} as={Link}
+          to='/' onClick={this.handleItemClick}/>
+
+        <Menu.Menu position='right'>
+          <Menu.Item as={Link} to='/user/signup'>
+            <Button color='olive'>Sign Up</Button>
+          </Menu.Item>
+          <Menu.Item as={Link} to='/user/signin'>
+            <Button color='teal'>Sign In</Button>
+          </Menu.Item>
+        </Menu.Menu>
+      </Menu>
       </div>
     );
 
     const wasSignedIn = (
       <div>
-        <span><Link to="/user/:userId/profile">
+      <Menu size='large'>
+        <Menu.Item name='home' active={activeItem === 'home'} as={Link}
+          to='/' onClick={this.handleItemClick}/>
+        <Menu.Item name='profile' active={activeItem === 'profile'} as={Link}
+          to='/user/:userId/profile' onClick={this.handleItemClick}>
           Profile: {this.props.status.token.name}
-        </Link></span>
-        <span><Link to="/post/write">Write</Link></span>
-        <a onClick={this.handleSignOut}>Sign Out</a>
+        </Menu.Item>
+        <Menu.Item name='write' active={activeItem === 'write'} as={Link}
+          to='/post/write' onClick={this.handleItemClick}/>
+
+        <Menu.Menu position='right'>
+          <Menu.Item onClick={this.handleSignOut}>
+            <Button color='pink'>Sign Out</Button>
+          </Menu.Item>
+        </Menu.Menu>
+      </Menu>
       </div>
     );
 
     return(
       <div className="Navigation">
-        <span><Link to="/">Home</Link></span>
         {this.props.status.isSignedIn ? wasSignedIn : wasSignedOut}
       </div>
     );

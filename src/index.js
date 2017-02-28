@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import {SignUpContainer, SignInContainer} from './containers';
 import App from './App';
 import './index.css';
+import '../semantic/dist/semantic.min.css';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 const rootElement = document.getElementById('root');

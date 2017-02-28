@@ -1,6 +1,18 @@
 .DS_STORE
-node_modules
+*.eot
+*.svg
+*.ttf
+
+# log file
+*.log
+
+# Node and related ecosystem
+node_modules/
+Makefile
+
+# Webpack related
 build/
 public/bundle.js
 
-
+# Semantic-UI related
+semantic/
