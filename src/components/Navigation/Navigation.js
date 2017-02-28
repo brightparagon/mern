@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {Button, Menu} from 'semantic-ui-react';
-import './Navigation.css';
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -9,7 +8,6 @@ class Navigation extends React.Component {
     this.handleSignOut = this.handleSignOut.bind(this);
     this.handleItemClick = this.handleItemClick.bind(this);
     this.state = {
-      // initially chosen nav item: home
       activeItem: 'home',
     };
   }
@@ -24,44 +22,43 @@ class Navigation extends React.Component {
 
   render() {
     let {activeItem} = this.state;
-    let isSignedIn = this.props.status.isSignedIn;
 
     const wasSignedOut = (
       <div>
-      <Menu size='large'>
-        <Menu.Item name='home' active={activeItem === 'home'} as={Link}
-          to='/' onClick={this.handleItemClick}/>
+        <Menu size='large'>
+          <Menu.Item name='home' active={activeItem === 'home'} as={Link}
+            to='/' onClick={this.handleItemClick}/>
 
-        <Menu.Menu position='right'>
-          <Menu.Item as={Link} to='/user/signup'>
-            <Button color='olive'>Sign Up</Button>
-          </Menu.Item>
-          <Menu.Item as={Link} to='/user/signin'>
-            <Button color='teal'>Sign In</Button>
-          </Menu.Item>
-        </Menu.Menu>
-      </Menu>
+          <Menu.Menu position='right'>
+            <Menu.Item as={Link} to='/user/signup'>
+              <Button color='olive'>Sign Up</Button>
+            </Menu.Item>
+            <Menu.Item as={Link} to='/user/signin'>
+              <Button color='teal'>Sign In</Button>
+            </Menu.Item>
+          </Menu.Menu>
+        </Menu>
       </div>
     );
 
     const wasSignedIn = (
       <div>
-      <Menu size='large'>
-        <Menu.Item name='home' active={activeItem === 'home'} as={Link}
-          to='/' onClick={this.handleItemClick}/>
-        <Menu.Item name='profile' active={activeItem === 'profile'} as={Link}
-          to='/user/:userId/profile' onClick={this.handleItemClick}>
-          Profile: {this.props.status.token.name}
-        </Menu.Item>
-        <Menu.Item name='write' active={activeItem === 'write'} as={Link}
-          to='/post/write' onClick={this.handleItemClick}/>
-
-        <Menu.Menu position='right'>
-          <Menu.Item onClick={this.handleSignOut}>
-            <Button color='pink'>Sign Out</Button>
+        <Menu size='small'>
+          <Menu.Item name='home' active={activeItem === 'home'} as={Link}
+            to='/' onClick={this.handleItemClick}/>
+          <Menu.Item name='profile' active={activeItem === 'profile'} as={Link}
+            to='/user/:userId/profile' onClick={this.handleItemClick}>
+            Profile: {this.props.status.token.name}
           </Menu.Item>
-        </Menu.Menu>
-      </Menu>
+          <Menu.Item name='write' active={activeItem === 'write'} as={Link}
+            to='/post/write' onClick={this.handleItemClick}/>
+
+          <Menu.Menu position='right'>
+            <Menu.Item onClick={this.handleSignOut}>
+              <Button color='pink'>Sign Out</Button>
+            </Menu.Item>
+          </Menu.Menu>
+        </Menu>
       </div>
     );
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import './SignIn.css';
+import {Button, Input, Grid, Icon, Label} from 'semantic-ui-react';
 
 class SignIn extends React.Component {
 
@@ -14,9 +14,9 @@ class SignIn extends React.Component {
     this.handleSignIn = this.handleSignIn.bind(this);
   }
 
-  handleChange(e) {
+  handleChange(e, {name, value}) {
     let nextState = {};
-    nextState[e.target.name] = e.target.value;
+    nextState[name] = value;
     this.setState(nextState);
   }
 
@@ -36,35 +36,31 @@ class SignIn extends React.Component {
   }
 
   render() {
-    const inputBoxes = (
-      <div>
-        <div className="Email">
-          <label>Email</label>
-          <input
-            name="email"
-            type="text"
-            className="validate"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="input-field col s12">
-          <label>Password</label>
-          <input
-            name="password"
-            type="password"
-            className="validate"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-        </div>
-      </div>
-    );
-
     return(
       <div className="SignIn">
-        {inputBoxes}
-        <a onClick={this.handleSignIn}>SIGN IN</a>
+        <Grid centered columns={3} verticalAlign='middle'>
+          <Grid.Column>
+            <Label color='teal'>Email</Label>
+            <br/>
+            <Input focus iconPosition='left' placeholder='Email'
+              value={this.state.email} name='email'
+              onChange={this.handleChange}>
+              <Icon name='at'/>
+              <input/>
+            </Input>
+            <br/>
+            <br/>
+            <Label color='orange'>Password</Label>
+            <br/>
+            <Input value={this.state.password} name='password'
+              onChange={this.handleChange}>
+              <input type='password'/>
+            </Input>
+            <br/>
+            <br/>
+            <Button color='green' onClick={this.handleSignIn}>Sign In</Button>
+          </Grid.Column>
+        </Grid>
       </div>
     );
   }

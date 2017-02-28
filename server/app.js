@@ -3,7 +3,6 @@ import webpack from 'webpack';
 import webpackDevServer from 'webpack-dev-server';
 import mongoose from 'mongoose';
 mongoose.Promise = global.Promise;
-import session from 'express-session';
 import path from 'path';
 import morgan from 'morgan'; // HTTP REQUEST LOGGER
 import methodOverride from 'method-override';
@@ -27,25 +26,12 @@ db.once('open', () => {
 // mongoose.connect('mongodb://username:password@host:port/database=');
 mongoose.connect('mongodb://localhost/mernblog', {safe: true});
 
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-}));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride());
-
-// public vs ./../public DIFFERENCE?
-// app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', express.static(path.join(__dirname, './../public')));
-
 app.use(passport.initialize());
-app.use(function(req, res, next) {
-  res.locals.signedUser = req.session.user;
-  next();
-});
 app.use('/api', routesApi);
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './../public/index.html'));

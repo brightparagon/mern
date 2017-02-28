@@ -11,7 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NavigationContainer />
+        <NavigationContainer/>
         {this.props.children}
       </div>
     );
