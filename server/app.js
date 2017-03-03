@@ -13,7 +13,7 @@ require('./passport');
 import routesApi from './routes';
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const devPort = 4000;
 const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/mernblog';
 app.locals.appTitle = 'mern-blog';
@@ -39,7 +39,7 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log('Express is listening on port', port);
+  console.log('Express is listening on port: ', port);
 });
 
 if(process.env.NODE_ENV == 'development') {
