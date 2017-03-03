@@ -52,6 +52,7 @@ require('./passport');
 var app = (0, _express2.default)();
 var port = 3000;
 var devPort = 4000;
+var dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/mernblog';
 app.locals.appTitle = 'mern-blog';
 
 /* mongodb connection */
@@ -61,7 +62,7 @@ db.once('open', function () {
   console.log('Connected to mongodb server');
 });
 // mongoose.connect('mongodb://username:password@host:port/database=');
-_mongoose2.default.connect('mongodb://localhost/mernblog', { safe: true });
+_mongoose2.default.connect(dbUrl, { safe: true });
 
 app.use((0, _morgan2.default)('dev'));
 app.use(_bodyParser2.default.json());
