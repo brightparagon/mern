@@ -48,9 +48,8 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.66.0",
-    "superagent": "^3.4.1"
-  },
-  "devDependencies": {
+    "superagent": "^3.4.1",
+    
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
@@ -67,5 +66,7 @@
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^1.16.3"
+  },
+  "devDependencies": {
   }
 }
