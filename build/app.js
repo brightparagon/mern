@@ -50,7 +50,7 @@ require('./passport');
 
 
 var app = (0, _express2.default)();
-var port = 3000;
+var port = process.env.PORT || 3000;
 var devPort = 4000;
 var dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/mernblog';
 app.locals.appTitle = 'mern-blog';
@@ -76,7 +76,7 @@ app.get('*', function (req, res) {
 });
 
 app.listen(port, function () {
-  console.log('Express is listening on port', port);
+  console.log('Express is listening on port: ', port);
 });
 
 if (process.env.NODE_ENV == 'development') {
