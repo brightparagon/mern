@@ -4,6 +4,7 @@
   "description": "mern + elasticsearch project",
   "main": "app.js",
   "scripts": {
+    "heroku-postbuild": "npm run build",
     "start-old": "webpack-dev-server --hot",
     "clean": "rm -rf build public/bundle.js",
     "build": "babel server --out-dir build --presets=es2015 && webpack",
