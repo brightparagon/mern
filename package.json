@@ -49,7 +49,7 @@
     "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.66.0",
     "superagent": "^3.4.1",
-    
+
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
