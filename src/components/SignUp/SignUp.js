@@ -1,11 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {Button, Input, Grid, Icon, Label} from 'semantic-ui-react';
 
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
-    // those three variables are changeable -
-    // by setState()-> should be states not props
     this.state = {
       email: '',
       name: '',
@@ -15,9 +14,9 @@ class SignUp extends React.Component {
     this.handleSignUp = this.handleSignUp.bind(this);
   }
 
-  handleChange(e) {
+  handleChange(e, {name, value}) {
     let nextState = {};
-    nextState[e.target.name] = e.target.value;
+    nextState[name] = value;
     this.setState(nextState);
   }
 
@@ -39,45 +38,42 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const inputBoxes = (
-      <div className="InputBoxes">
-        <div className="Email">
-          <label>Email</label>
-          <input
-            name="email"
-            type="text"
-            className="validate"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="Name">
-          <label>Name</label>
-          <input
-            name="name"
-            type="text"
-            className="validate"
-            value={this.state.name}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="Password">
-          <label>Password</label>
-          <input
-            name="password"
-            type="password"
-            className="validate"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-        </div>
-      </div>
-    );
-
     return(
       <div className="SignUp">
-        {inputBoxes}
-        <a onClick={this.handleSignUp}>SIGN UP</a>
+        <br/>
+        <br/>
+        <Grid centered columns={3} verticalAlign='middle'>
+          <Grid.Column>
+            <Label color='teal'>Email</Label>
+            <br/>
+            <Input focus iconPosition='left' placeholder='Email'
+              value={this.state.email} name='email'
+              onChange={this.handleChange}>
+              <Icon name='at'/>
+              <input/>
+            </Input>
+            <br/>
+            <br/>
+            <Label color='olive'>Email</Label>
+            <br/>
+            <Input placeholder='Name'
+              value={this.state.name} name='name'
+              onChange={this.handleChange}>
+              <input/>
+            </Input>
+            <br/>
+            <br/>
+            <Label color='orange'>Password</Label>
+            <br/>
+            <Input value={this.state.password} name='password'
+              onChange={this.handleChange}>
+              <input type='password'/>
+            </Input>
+            <br/>
+            <br/>
+            <Button color='green' onClick={this.handleSignUp}>Sign Up!</Button>
+          </Grid.Column>
+        </Grid>
       </div>
     );
   }

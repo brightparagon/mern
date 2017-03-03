@@ -38,6 +38,8 @@ class SignIn extends React.Component {
   render() {
     return(
       <div className="SignIn">
+        <br/>
+        <br/>
         <Grid centered columns={3} verticalAlign='middle'>
           <Grid.Column>
             <Label color='teal'>Email</Label>
