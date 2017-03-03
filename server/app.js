@@ -15,6 +15,7 @@ import routesApi from './routes';
 const app = express();
 const port = 3000;
 const devPort = 4000;
+const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/mernblog';
 app.locals.appTitle = 'mern-blog';
 
 /* mongodb connection */
@@ -24,7 +25,7 @@ db.once('open', () => {
   console.log('Connected to mongodb server');
 });
 // mongoose.connect('mongodb://username:password@host:port/database=');
-mongoose.connect('mongodb://localhost/mernblog', {safe: true});
+mongoose.connect(dbUrl, {safe: true});
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
