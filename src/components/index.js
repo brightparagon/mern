@@ -1,5 +1,11 @@
-import Navigation from './Navigation/Navigation';
-import SignUp from './SignUp/SignUp';
-import SignIn from './SignIn/SignIn';
+import Navigation from './Navigation';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
+import Write from './Write';
 
-export {Navigation, SignUp, SignIn};
+export {
+  Navigation,
+  SignUp,
+  SignIn,
+  Write,
+};

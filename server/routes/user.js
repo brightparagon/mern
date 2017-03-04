@@ -95,17 +95,4 @@ router.post('/signin', (req, res) => {
   })(req, res);
 });
 
-// module.exports.signOut = function(req, res, next) {
-//   delete req.session.user;
-//   res.redirect('/');
-// };
-//
-// module.exports.profile = function(req, res, next) {
-//   User.findById(req.query.userId).populate('posts')
-//    .exec(function(err, user) {
-//     if(err) return next(err);
-//     res.render('profile', {user: user});
-//   });
-// };
-
 export default router;

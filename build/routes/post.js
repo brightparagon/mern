@@ -1,5 +1,9 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
@@ -20,54 +24,55 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = _express2.default.Router();
 
-module.exports.getPosts = function (req, res, next) {
+// LIST POSTS
+router.get('/all', function (req, res, next) {
   _post2.default.find().populate('author').exec(function (err, posts) {
     if (err) return next(err);
-    res.render('list', { posts: posts });
+    return res.json(posts);
   });
-};
+});
 
-module.exports.createPost = function (req, res, next) {
+// CREATE POST
+router.post('/', function (req, res, next) {
   var post = new _post2.default();
   post.title = req.body.title;
   post.content = req.body.content;
-  post.author = req.session.user._id;
+  post.author = req.body.userId;
   post.save(function (err, post) {
     if (err) return next(err);
-    res.render('post', { post: post });
+    return res.json(post);
   });
-  req.session.user.posts.push(post);
-  // 포스트를 하나 저장할 때마다 유저 스키마에 포스트를 저장하고 유저를 업데이트한다
-  _user2.default.findByIdAndUpdate(req.session.user._id, req.session.user, { new: true }, function (err) {
-    if (err) return next(err);
-    // {new: true} 옵션은 수정된 객체를 반환할 것인가의 유무를 전달한다
-  });
-};
 
-module.exports.getPost = function (req, res, next) {
+  // 포스트를 하나 저장할 때마다 유저 스키마에 포스트를 저장하고 유저를 업데이트한다
+  // User.findByIdAndUpdate(req.session.user._id, req.session.user,
+  //   {new: true}, function(err) {
+  //   if(err) return next(err);
+  //   // {new: true} 옵션은 수정된 객체를 반환할 것인가의 유무를 전달한다
+  // });
+});
+
+// RETRIEVE POST
+router.get('/', function (req, res, next) {
   _post2.default.findById(req.query.postId).populate('author').exec(function (err, post) {
     if (err) return next(err);
-    res.render('post', { post: post });
+    return res.json(post);
   });
-};
+});
 
-module.exports.updatePost = function (req, res, next) {
+// UPDATE POST
+router.put('/:postId', function (req, res, next) {
   _post2.default.findByIdAndUpdate(req.query.postId, { $set: req.body }, { new: true }).populate('author').exec(function (err, post) {
     if (err) return next(err);
-    res.render('post', { post: post });
+    return res.json(post);
   });
-};
+});
 
-module.exports.getUpdatePost = function (req, res, next) {
-  _post2.default.findById(req.query.postId).populate('author').exec(function (err, post) {
-    if (err) return next(err);
-    res.render('updatePost', { post: post });
-  });
-};
-
-module.exports.deletePost = function (req, res, next) {
+// DELETE POST
+router.delete('/:postId', function (req, res, next) {
   _post2.default.findByIdAndRemove(req.query.postId, function (err) {
     if (err) return next(err);
-    res.redirect('/list');
+    return res.json({ success: true });
   });
-};
+});
+
+exports.default = router;
