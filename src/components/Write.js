@@ -34,24 +34,24 @@ class Write extends React.Component {
       <div className="Write">
         <br/>
         <br/>
-        <Form>
-          <Container text>
-            <Form.Input label='Title' fluid name='title' placeholder='title'
-              value={this.state.title} onChange={this.handleChange}>
-              <input/>
-            </Form.Input>
-            <Form.TextArea rows='20' name='contents' placeholder='Write here!'
-              value={this.state.contents} onChange={this.handleChange}>
-              <textarea/>
-            </Form.TextArea>
-            <br/>
-            <Button.Group>
-              <Button color='orange' as={Link} to='/'>Cancel</Button>
-              <Button.Or/>
-              <Button positive onClick={this.handleUpload}>Save</Button>
-            </Button.Group>
-          </Container>
-        </Form>
+        <Container text>
+          <Input name='title' placeholder='title'
+            value={this.state.title} onChange={this.handleChange}>
+            <input/>
+          </Input>
+          <br/>
+          <br/>
+          <Input fluid name='contents' placeholder='Write here!'
+            value={this.state.contents} onChange={this.handleChange}>
+            <input/>
+          </Input>
+          <br/>
+          <Button.Group>
+            <Button color='orange' as={Link} to='/'>Cancel</Button>
+            <Button.Or/>
+            <Button positive onClick={this.handleUpload}>Save</Button>
+          </Button.Group>
+        </Container>
       </div>
     );
   }
@@ -63,7 +63,7 @@ Write.propTypes = {
 };
 
 Write.defaultProps = {
-  onUpload: (title, contents) => {
+  onUpload: (title, contents, userId) => {
     console.error("onUpload not defined");
   },
   userId: '',

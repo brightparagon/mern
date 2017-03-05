@@ -14,7 +14,7 @@ var Schema = _mongoose2.default.Schema;
 
 var postSchema = new Schema({
   title: String,
-  content: String,
+  contents: String,
   author: {
     type: _mongoose2.default.Schema.Types.ObjectId,
     ref: 'User'

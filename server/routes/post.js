@@ -16,7 +16,7 @@ router.get('/all', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const post = new Post();
   post.title = req.body.title;
-  post.content = req.body.content;
+  post.contents = req.body.contents;
   post.author = req.body.userId;
   post.save(function(err, post) {
     if(err) return next(err);
@@ -24,11 +24,11 @@ router.post('/', (req, res, next) => {
   });
 
   // 포스트를 하나 저장할 때마다 유저 스키마에 포스트를 저장하고 유저를 업데이트한다
-  // User.findByIdAndUpdate(req.session.user._id, req.session.user,
-  //   {new: true}, function(err) {
-  //   if(err) return next(err);
-  //   // {new: true} 옵션은 수정된 객체를 반환할 것인가의 유무를 전달한다
-  // });
+  User.findByIdAndUpdate(req.body.userId, {$push: {posts: post._id}},
+    {new: true}, function(err) {
+    if(err) return next(err);
+    // {new: true} 옵션은 수정된 객체를 반환할 것인가의 유무를 전달한다
+  });
 });
 
 // RETRIEVE POST
