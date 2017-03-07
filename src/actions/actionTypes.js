@@ -23,6 +23,7 @@ export const POST_UPLOAD_FAIL = "POST_UPLOAD_FAIL";
 
 export const POST_LIST = "POST_LIST";
 export const POST_LIST_SUCCESS = "POST_LIST_SUCCESS";
+export const POST_LIST_FAIL = "POST_LIST_FAIL";
 
 export const POST_UPDATE = "POST_UPDATE";
 export const POST_UPDATE_SUCCESS = "POST_UPDATE_SUCCESS";

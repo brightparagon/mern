@@ -9,6 +9,7 @@ import {
   SignUpContainer,
   SignInContainer,
   PostCreateContainer,
+  ListContainer,
 } from './containers';
 import App from './App';
 import './index.css';
@@ -22,10 +23,11 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={SignUpContainer}/>
+        <IndexRoute component={ListContainer}/>
         <Route path="user/signup" component={SignUpContainer}/>
         <Route path="user/signin" component={SignInContainer}/>
         <Route path="post/write" component={PostCreateContainer}/>
+        <Route path="post/all" component={ListContainer}/>
       </Route>
     </Router>
   </Provider>, rootElement

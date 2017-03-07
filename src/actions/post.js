@@ -54,50 +54,34 @@ export function createPostFail() {
 // DISPATCHER FOR LIST POST
 export function listPostRequest() {
   return (dispatch) => {
-    dispatch(signin());
+    dispatch(listPost());
     return request
-      .post('/api/user/signin')
-      .send({
-        email: email,
-        password: password,
-      })
+      .get('/api/post/all')
       .then((response) => {
-        dispatch(createPostSuccess());
+        console.log(response.body.posts);
+        dispatch(listPostSuccess(response.body.posts));
       }).catch((error) => {
-        dispatch(createPostFail());
+        dispatch(listPostFail(error));
       });
   };
 }
 
-export function signin() {
+export function listPost() {
   return {
-    type: USER_SIGNIN,
+    type: POST_LIST,
   };
 }
 
-export function signinSuccess(token) {
+export function listPostSuccess(posts) {
   return {
-    type: USER_SIGNIN_SUCCESS,
-    token,
+    type: POST_LIST_SUCCESS,
+    posts,
   };
 }
 
-export function signinFail(failReason) {
+export function listPostFail(failReason) {
   return {
-    type: USER_SIGNIN_FAIL,
+    type: POST_LIST_FAIL,
     failReason,
-  };
-}
-
-// DISPATCHER FOR SIGN OUT
-export function signoutRequest() {
-  return (dispatch) => {
-    dispatch(signout());
-  };
-}
-
-export function signout() {
-  return {
-    type: USER_SIGNOUT,
   };
 }

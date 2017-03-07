@@ -2,11 +2,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {List} from '../components';
-// import {viewPostRequest} from '../actions/post';
+import {listPostRequest} from '../actions/post';
 
 class ListContainer extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMonut() {
+    this.props.listPostRequest().then(() => {
+
+    });
   }
 
   render() {
@@ -24,7 +30,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    listPostRequest: () => {
+      dispatch(listPostRequest());
+    },
   };
 };
 
