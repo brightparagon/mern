@@ -9,10 +9,8 @@ class ListContainer extends React.Component {
     super(props);
   }
 
-  componentDidMonut() {
-    this.props.listPostRequest().then(() => {
-
-    });
+  componentDidMount() {
+    this.props.listPostRequest();
   }
 
   render() {
@@ -31,7 +29,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     listPostRequest: () => {
-      dispatch(listPostRequest());
+      return dispatch(listPostRequest());
     },
   };
 };

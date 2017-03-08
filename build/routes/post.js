@@ -68,6 +68,7 @@ router.put('/:postId', function (req, res, next) {
 
 // DELETE POST
 router.delete('/:postId', function (req, res, next) {
+  // 게시물 삭제시 User 스키마에서도 ObjectId 삭제
   _post2.default.findByIdAndRemove(req.query.postId, function (err) {
     if (err) return next(err);
     return res.json({ success: true });
