@@ -58,7 +58,6 @@ export function listPostRequest() {
     return request
       .get('/api/post/all')
       .then((response) => {
-        console.log(response);
         dispatch(listPostSuccess(response.body.posts));
       }).catch((error) => {
         dispatch(listPostFail(error));

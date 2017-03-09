@@ -28,7 +28,9 @@ var router = _express2.default.Router();
 router.get('/all', function (req, res, next) {
   _post2.default.find().populate('author').exec(function (err, posts) {
     if (err) return next(err);
-    return res.json(posts);
+    return res.json({
+      posts: posts
+    });
   });
 });
 
@@ -40,7 +42,9 @@ router.post('/', function (req, res, next) {
   post.author = req.body.userId;
   post.save(function (err, post) {
     if (err) return next(err);
-    return res.json(post);
+    return res.json({
+      post: post
+    });
   });
 
   // 포스트를 하나 저장할 때마다 유저 스키마에 포스트를 저장하고 유저를 업데이트한다
@@ -54,7 +58,9 @@ router.post('/', function (req, res, next) {
 router.get('/', function (req, res, next) {
   _post2.default.findById(req.query.postId).populate('author').exec(function (err, post) {
     if (err) return next(err);
-    return res.json(post);
+    return res.json({
+      post: post
+    });
   });
 });
 
@@ -62,7 +68,9 @@ router.get('/', function (req, res, next) {
 router.put('/:postId', function (req, res, next) {
   _post2.default.findByIdAndUpdate(req.query.postId, { $set: req.body }, { new: true }).populate('author').exec(function (err, post) {
     if (err) return next(err);
-    return res.json(post);
+    return res.json({
+      post: post
+    });
   });
 });
 
@@ -71,7 +79,9 @@ router.delete('/:postId', function (req, res, next) {
   // 게시물 삭제시 User 스키마에서도 ObjectId 삭제
   _post2.default.findByIdAndRemove(req.query.postId, function (err) {
     if (err) return next(err);
-    return res.json({ success: true });
+    return res.json({
+      success: true
+    });
   });
 });
 

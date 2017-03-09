@@ -8,7 +8,9 @@ const router = express.Router();
 router.get('/all', (req, res, next) => {
   Post.find().populate('author').exec(function(err, posts) {
     if(err) return next(err);
-    return res.json(posts);
+    return res.json({
+      posts: posts,
+    });
   });
 });
 
@@ -20,7 +22,9 @@ router.post('/', (req, res, next) => {
   post.author = req.body.userId;
   post.save(function(err, post) {
     if(err) return next(err);
-    return res.json(post);
+    return res.json({
+      post: post,
+    });
   });
 
   // 포스트를 하나 저장할 때마다 유저 스키마에 포스트를 저장하고 유저를 업데이트한다
@@ -35,7 +39,9 @@ router.post('/', (req, res, next) => {
 router.get('/', (req, res, next) => {
   Post.findById(req.query.postId).populate('author').exec(function(err, post) {
     if(err) return next(err);
-    return res.json(post);
+    return res.json({
+      post: post,
+    });
   });
 });
 
@@ -44,7 +50,9 @@ router.put('/:postId', (req, res, next) => {
   Post.findByIdAndUpdate(req.query.postId, {$set: req.body},
     {new: true}).populate('author').exec(function(err, post) {
     if(err) return next(err);
-    return res.json(post);
+    return res.json({
+      post: post,
+    });
   });
 });
 
@@ -53,7 +61,9 @@ router.delete('/:postId', (req, res, next) => {
   // 게시물 삭제시 User 스키마에서도 ObjectId 삭제
   Post.findByIdAndRemove(req.query.postId, function(err) {
     if(err) return next(err);
-    return res.json({success: true});
+    return res.json({
+      success: true,
+    });
   });
 });
 

@@ -15,14 +15,14 @@ class ListContainer extends React.Component {
 
   render() {
     return(
-      <List posts={this.props.posts}/>
+      <List posts={this.props.list.data}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.post.list.data,
+    list: state.post.list,
   };
 };
 

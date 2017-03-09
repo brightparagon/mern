@@ -9,6 +9,7 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      dimmer: '',
       open: false,
     };
     this.show = this.show.bind(this);
@@ -16,11 +17,21 @@ class List extends React.Component {
   }
 
   show(dimmer) {
-    this.setState({dimmer, open: true});
+    this.setState({
+      dimmer: dimmer,
+      open: true,
+    });
   }
 
   close() {
-    this.setState({open: false});
+    this.setState({
+      open: false,
+    });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    let update = JSON.stringify(this.props) !== JSON.stringify(nextProps);
+    return update;
   }
 
   render() {
@@ -28,7 +39,11 @@ class List extends React.Component {
       return data.map((post, i) => {
         return (
           <div>
-            <Button onClick={this.show('blurring')}>{post.title}</Button>
+            <Button onClick={this.show('blurring')}>
+              {post.title}
+            </Button>
+            <br/>
+            <br/>
           </div>
         );
       });

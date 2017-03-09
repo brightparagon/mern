@@ -71,7 +71,9 @@ router.post('/signup', function (req, res) {
     // SAVE IN THE DATABASE
     user.save(function (err, user) {
       if (err) throw err;
-      return res.json({ success: true });
+      return res.json({
+        success: true
+      });
       // res.render('profile', {user: req.session.user});
     });
   });
@@ -106,7 +108,7 @@ router.post('/signin', function (req, res) {
       });
     } else {
       res.status(401).send({
-        failReason: 'info authenticate in server ' + info
+        failReason: info
       });
     }
   })(req, res);
