@@ -1,80 +1,80 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {
-  Button, Image, Grid, Icon, Label,
-  Container, Header, TextArea, Modal,
+  Button, Label, Container,
+  Header, Modal, Image,
 } from 'semantic-ui-react';
 
 class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dimmer: '',
+      dimmer: 'blurring',
       open: false,
     };
-    this.show = this.show.bind(this);
-    this.close = this.close.bind(this);
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
-  show(dimmer) {
+  handleShow() {
     this.setState({
-      dimmer: dimmer,
       open: true,
     });
   }
 
-  close() {
+  handleClose() {
     this.setState({
       open: false,
     });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    let update = JSON.stringify(this.props) !== JSON.stringify(nextProps);
-    return update;
+    if(JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+      return true;
+    }
+    if(JSON.stringify(this.state) !== JSON.stringify(nextState)) {
+      return true;
+    }
+    return false;
   }
 
   render() {
-    const line = (data) => {
-      return data.map((post, i) => {
-        return (
-          <div>
-            <Button onClick={this.show('blurring')}>
-              {post.title}
-            </Button>
-            <br/>
-            <br/>
-          </div>
-        );
-      });
-    };
+    const buttons = this.props.posts.map((post, i) =>
+      <div>
+        <br/>
+        <Button color='green' key={i} onClick={this.handleShow}>
+          {post.title}
+        </Button>
+      </div>
+    );
 
     return(
       <div className="List">
         <br/>
         <br/>
         <Container text>
-          {line(this.props.posts)}
-          <Modal dimmer={this.state.dimmer}
-            open={this.state.open} onClose={this.close}>
-            <Modal.Header>Select a Photo</Modal.Header>
-            <Modal.Content image>
-              <Image wrapped size='medium'
-                src='http://semantic-ui.com/images/avatar2/large/rachel.png'/>
-              <Modal.Description>
-                <Header>Default Profile Image</Header>
-                <p>Is it okay to use this photo?</p>
-              </Modal.Description>
-            </Modal.Content>
-            <Modal.Actions>
-              <Button color='black' onClick={this.close}>
-                Nope
-              </Button>
-              <Button positive icon='checkmark' labelPosition='right'
-                content="Yep, that's me" onClick={this.close}/>
-            </Modal.Actions>
-          </Modal>
+          {buttons}
         </Container>
+
+        <Modal dimmer={this.state.dimmer} open={this.state.open}
+          onClose={() => this.handleClose()}>
+          <Modal.Header>Select a Photo</Modal.Header>
+          <Modal.Content image>
+            <Image wrapped size='medium'
+              src='http://semantic-ui.com/images/avatar2/large/rachel.png'/>
+            <Modal.Description>
+              <Header>Default Profile Image</Header>
+              <p>Is it okay to use this photo?</p>
+            </Modal.Description>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color='black' onClick={() => this.handleClose()}>
+              Nope
+            </Button>
+            <Button positive icon='checkmark' labelPosition='right'
+              content="Yep, that's me" onClick={() => this.handleClose()}/>
+          </Modal.Actions>
+        </Modal>
       </div>
     );
   }
