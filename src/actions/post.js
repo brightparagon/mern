@@ -27,9 +27,13 @@ export function createPostRequest(title, contents, userId) {
       .send({title, contents, userId})
       .then((response) => {
         dispatch(createPostSuccess());
-      }).catch((error) => {
-        dispatch(createPostFail());
+      }, (error) => {
+        console.log(error);
+        dispatch(createPostFail(error));
       });
+      // .catch((error) => {
+      //   dispatch(createPostFail());
+      // });
   };
 }
 
@@ -45,9 +49,10 @@ export function createPostSuccess() {
   };
 }
 
-export function createPostFail() {
+export function createPostFail(error) {
   return {
     type: POST_UPLOAD_FAIL,
+    failReason: error,
   };
 }
 
@@ -59,7 +64,7 @@ export function listPostRequest() {
       .get('/api/post/all')
       .then((response) => {
         dispatch(listPostSuccess(response.body.posts));
-      }).catch((error) => {
+      }, (error) => {
         dispatch(listPostFail(error));
       });
   };
@@ -78,9 +83,72 @@ export function listPostSuccess(posts) {
   };
 }
 
-export function listPostFail(failReason) {
+export function listPostFail(error) {
   return {
     type: POST_LIST_FAIL,
-    failReason,
+    failReason: error,
+  };
+}
+
+// DISPATCHER FOR EDIT POST
+export function editPostRequest(id, title, contents) {
+  return (dispatch) => {
+    dispatch(editPost());
+    return request
+      .put('/api/post/' + id)
+      .send({title, contents})
+      .then((response) => {
+        dispatch(editPostSuccess(response.body.post));
+      }, (error) => {
+        dispatch(editPostFail(error));
+      });
+  };
+}
+
+export function editPost() {
+  return {
+    type: POST_UPDATE,
+  };
+}
+
+export function editPostSuccess(post) {
+  return {
+    type: POST_UPDATE_SUCCESS,
+    post,
+  };
+}
+
+export function editPostFail(error) {
+  return {
+    type: POST_UPDATE_FAIL,
+    failReason: error,
+  };
+}
+
+// DISPATCHER FOR DELETE POST
+export function deletePostReqeust(id) {
+  return (dispatch) => {
+    dispatch(deletePost());
+    return request
+      .delete('/api/post/' + id)
+      .then((response) => {
+        console.log(response);
+        dispatch(deletePostSuccess());
+      }, (error) => {
+        dispatch(deletePostFail(error));
+      });
+  };
+}
+
+export function deletePostSucess() {
+  return {
+    type: POST_DELETE_SUCCESS,
+  };
+}
+
+export function deletePostFail(error) {
+  return {
+    type: POST_DELETE_FAIL,
+    failReason: error,
   };
 }

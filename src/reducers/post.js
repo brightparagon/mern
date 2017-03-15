@@ -13,7 +13,7 @@ const initialState = {
   edit: {
     status: 'INIT',
   },
-  remove: {
+  delete: {
     status: 'INIT',
   },
 };
@@ -109,19 +109,19 @@ export default function post(state, action) {
     // DELETE POST
     case types.POST_DELETE:
       return update(state, {
-        remove: {
+        delete: {
           status: {$set: 'WAITING'},
         },
       });
     case types.POST_DELETE_SUCCESS:
       return update(state, {
-        remove: {
+        delete: {
           status: {$set: 'WAITING'},
         },
       });
     case types.POST_DELETE_FAIL:
       return update(state, {
-        remove: {
+        delete: {
           status: {$set: 'FAIL'},
           failReason: {$set: action.failReason},
         },
