@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {
-  Button, Label, Container,
-  Header, Modal, Image,
+  Button, Container, Input,
+  Header, Modal,
 } from 'semantic-ui-react';
 import {Post} from './';
 
@@ -10,9 +10,9 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dimmer: 'blurring',
       open: false,
       editMode: false,
+      ownership: false,
       post: {
         _id: '',
         title: '',
@@ -29,46 +29,8 @@ class List extends React.Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEditView = this.handleEditView.bind(this);
-  }
-
-  handleEditView() {
-
-  }
-
-  handleEdit() {
-    if(this.state.editMode) {
-      const id = this.state.post._id;
-      let title = this.state.post.title;
-      let contents = this.state.post.contents;
-
-      this.props.onEdit(id, title, contents).then(() => {
-        this.setState({
-          editMode: !this.state.editMode,
-        });
-      });
-    } else {
-      this.setState({
-        editMode: !this.state.editMode,
-      });
-    }
-  }
-
-  handleDelete() {
-    const id = this.state.post._id;
-    this.props.onDelete(id);
-  }
-
-  handleShow(post) {
-    this.setState({
-      open: true,
-      post: post,
-    });
-  }
-
-  handleClose() {
-    this.setState({
-      open: false,
-    });
+    this.handleEditCancel = this.handleEditCancel.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -81,25 +43,108 @@ class List extends React.Component {
     return false;
   }
 
+  handleChange(e, {name, value}) {
+    let nextState = {
+      post: {},
+    };
+    nextState.post[name] = value;
+    this.setState(nextState);
+  }
+
+  handleEditCancel() {
+    this.setState({
+      editMode: false,
+    });
+  }
+
+  handleEditView() {
+    this.setState({
+      editMode: true,
+    });
+  }
+
+  handleEdit() {
+    let id = this.state.post._id;
+    let title = this.state.post.title;
+    let contents = this.state.post.contents;
+
+    this.props.onEdit(id, title, contents).then(() => {
+      this.setState({
+        editMode: !this.state.editMode,
+      });
+    });
+  }
+
+  handleDelete() {
+    let id = this.state.post._id;
+    this.props.onDelete(id);
+  }
+
+  handleShow(post) {
+    this.setState({
+      open: true,
+      post: post,
+      ownership: this.props.currentUser._id === post.author._id,
+    });
+  }
+
+  handleClose() {
+    this.setState({
+      open: false,
+      editMode: false,
+    });
+  }
+
   render() {
-    const ownership =
-      this.props.currentUser._id === this.state.post.author._id ? true : false;
-
-    const editButton = (
-      <Button color='green' onClick={this.handleEdit}>
-        Edit
-      </Button>
-    );
-
     const buttonsOwned = (
       <div>
-        <Button color='black' onClick={this.handleEditView}>
-          Edit
-        </Button>
-        <Button color='red' onClick={this.handleDelete}>
-          Delete
-        </Button>
+        <Button color='black' content='Edit' onClick={this.handleEditView}/>
+        <Button negative content='Delete' onClick={this.handleDelete}/>
+        <Button positive icon='checkmark' labelPosition='right'
+          content='Close' onClick={this.handleClose}/>
       </div>
+    );
+
+    const postView = (
+      <Modal size='small' dimmer='blurring' open={this.state.open}
+        onClose={this.handleClose}>
+        <Modal.Header>
+          {this.state.post.title}
+        </Modal.Header>
+        <Modal.Content>
+          <p>{this.state.post.contents}</p>
+        </Modal.Content>
+        <Modal.Actions>
+          {this.state.ownership ? buttonsOwned :
+            <Button positive icon='checkmark' labelPosition='right'
+            content='Close' onClick={this.handleClose}/>}
+        </Modal.Actions>
+      </Modal>
+    );
+
+    const editView = (
+      <Modal size='small' dimmer='blurring' open={this.state.open}
+        onClose={this.handleClose}>
+        <Modal.Header>
+          <Input placeholder='Title'
+            value={this.state.post.title} name='title'
+            onChange={this.handleChange}>
+          </Input>
+        </Modal.Header>
+        <Modal.Content>
+          <Input placeholder='Contents'
+            value={this.state.post.contents} name='contents'
+            onChange={this.handleChange}>
+            <input/>
+          </Input>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color='green' content='Edit' onClick={this.handleEdit}/>
+          <Button negative content='Cancel' onClick={this.handleEditCancel}/>
+          <Button positive icon='checkmark' labelPosition='right'
+            content='Close' onClick={this.handleClose}/>
+        </Modal.Actions>
+      </Modal>
     );
 
     const posts = this.props.posts.map((post) =>
@@ -116,25 +161,7 @@ class List extends React.Component {
         <Container text>
           {posts}
         </Container>
-
-        <Modal dimmer={this.state.dimmer} open={this.state.open}
-          onClose={this.handleClose}>
-          <Modal.Header>{this.state.post.author.name}</Modal.Header>
-          <Modal.Content image>
-            <Image wrapped size='medium'
-              src='http://semantic-ui.com/images/avatar2/large/rachel.png'/>
-            <Modal.Description>
-              <Header>{this.state.post.title}</Header>
-              <p>{this.state.post.contents}</p>
-            </Modal.Description>
-          </Modal.Content>
-          <Modal.Actions>
-            {ownership ? buttonsOwned : undefined}
-            {this.state.editMode ? editButton : undefined}
-            <Button positive icon='checkmark' labelPosition='right'
-              content="Close" onClick={this.handleClose}/>
-          </Modal.Actions>
-        </Modal>
+        {this.state.editMode ? editView : postView}
       </div>
     );
   }

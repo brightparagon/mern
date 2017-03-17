@@ -100,6 +100,7 @@ export function editPostRequest(id, title, contents) {
       .then((response) => {
         dispatch(editPostSuccess(response.body.post));
       }, (error) => {
+        console.log('error!!!!');
         dispatch(editPostFail(error));
       });
   };
@@ -126,13 +127,12 @@ export function editPostFail(error) {
 }
 
 // DISPATCHER FOR DELETE POST
-export function deletePostReqeust(id) {
+export function deletePostRequest(id) {
   return (dispatch) => {
     dispatch(deletePost());
     return request
       .delete('/api/post/' + id)
       .then((response) => {
-        console.log(response);
         dispatch(deletePostSuccess());
       }, (error) => {
         dispatch(deletePostFail(error));
@@ -140,7 +140,13 @@ export function deletePostReqeust(id) {
   };
 }
 
-export function deletePostSucess() {
+export function deletePost() {
+  return {
+    type: POST_DELETE,
+  };
+}
+
+export function deletePostSuccess() {
   return {
     type: POST_DELETE_SUCCESS,
   };

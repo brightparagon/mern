@@ -116,7 +116,7 @@ export default function post(state, action) {
     case types.POST_DELETE_SUCCESS:
       return update(state, {
         delete: {
-          status: {$set: 'WAITING'},
+          status: {$set: 'SUCCESS'},
         },
       });
     case types.POST_DELETE_FAIL:

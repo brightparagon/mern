@@ -20,11 +20,13 @@ class ListContainer extends React.Component {
   }
 
   handleEdit(id, title, contents) {
-    this.props.editPostRequest(id, title, contents).then(() => {
+    return this.props.editPostRequest(id, title, contents).then(() => {
       if(this.props.edit.status === 'SUCCESS') {
         alert('Your post is updated successfully.');
+        return true;
       } else {
         alert('An error occured while your post is updated.');
+        return false;
       }
     });
   }
@@ -44,8 +46,8 @@ class ListContainer extends React.Component {
       <List
         posts={this.props.list.data}
         currentUser={this.props.currentUser}
-        onEdit={this.props.handleEdit}
-        onDelete={this.props.handleDelete}
+        onEdit={this.handleEdit}
+        onDelete={this.handleDelete}
       />
     );
   }
@@ -58,7 +60,7 @@ const mapStateToProps = (state) => {
     list: state.post.list,
     edit: state.post.edit,
     delete: state.post.delete,
-    currentUser: state.navigation.token,
+    currentUser: state.navigation.status.token,
   };
 };
 

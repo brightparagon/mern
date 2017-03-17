@@ -55,8 +55,8 @@ router.post('/', function (req, res, next) {
 });
 
 // RETRIEVE POST
-router.get('/', function (req, res, next) {
-  _post2.default.findById(req.query.postId).populate('author').exec(function (err, post) {
+router.get('/:postId', function (req, res, next) {
+  _post2.default.findById(req.params.postId).populate('author').exec(function (err, post) {
     if (err) return next(err);
     return res.json({
       post: post
@@ -66,7 +66,7 @@ router.get('/', function (req, res, next) {
 
 // UPDATE POST
 router.put('/:postId', function (req, res, next) {
-  _post2.default.findByIdAndUpdate(req.query.postId, { $set: req.body }, { new: true }).populate('author').exec(function (err, post) {
+  _post2.default.findByIdAndUpdate(req.params.postId, { $set: req.body }, { new: true }).populate('author').exec(function (err, post) {
     if (err) return next(err);
     return res.json({
       post: post
@@ -77,7 +77,7 @@ router.put('/:postId', function (req, res, next) {
 // DELETE POST
 router.delete('/:postId', function (req, res, next) {
   // 게시물 삭제시 User 스키마에서도 ObjectId 삭제
-  _post2.default.findByIdAndRemove(req.query.postId, function (err) {
+  _post2.default.findByIdAndRemove(req.params.postId, function (err) {
     if (err) return next(err);
     return res.json({
       success: true
