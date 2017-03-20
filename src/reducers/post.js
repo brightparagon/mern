@@ -95,7 +95,11 @@ export default function post(state, action) {
       return update(state, {
         edit: {
           status: {$set: 'SUCCESS'},
-          data: {$set: action.post},
+        },
+        list: {
+          data: {
+            [action.index]: {$set: action.post},
+          },
         },
       });
     case types.POST_UPDATE_FAIL:

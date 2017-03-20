@@ -47,6 +47,7 @@ router.get('/:postId', (req, res, next) => {
 
 // UPDATE POST
 router.put('/:postId', (req, res, next) => {
+  console.log(req.params.postId);
   Post.findByIdAndUpdate(req.params.postId, {$set: req.body},
     {new: true}).populate('author').exec(function(err, post) {
     if(err) return next(err);

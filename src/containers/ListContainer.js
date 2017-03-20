@@ -19,9 +19,10 @@ class ListContainer extends React.Component {
     this.props.listPostRequest();
   }
 
-  handleEdit(id, title, contents) {
-    return this.props.editPostRequest(id, title, contents).then(() => {
+  handleEdit(id, title, contents, index) {
+    return this.props.editPostRequest(id, title, contents, index).then(() => {
       if(this.props.edit.status === 'SUCCESS') {
+        this.props.listPostRequest();
         alert('Your post is updated successfully.');
         return true;
       } else {
@@ -32,11 +33,14 @@ class ListContainer extends React.Component {
   }
 
   handleDelete(id) {
-    this.props.deletePostRequest(id).then(() => {
+    return this.props.deletePostRequest(id).then(() => {
       if(this.props.delete.status === 'SUCCESS') {
+        this.props.listPostRequest();
         alert('Your post is deleted successfully.');
+        return true;
       } else {
         alert('An error occured while your post is deleted.');
+        return false;
       }
     });
   }
@@ -69,8 +73,8 @@ const mapDispatchToProps = (dispatch) => {
     listPostRequest: () => {
       return dispatch(listPostRequest());
     },
-    editPostRequest: (id, title, contents) => {
-      return dispatch(editPostRequest(id, title, contents));
+    editPostRequest: (id, title, contents, index) => {
+      return dispatch(editPostRequest(id, title, contents, index));
     },
     deletePostRequest: (id) => {
       return dispatch(deletePostRequest(id));

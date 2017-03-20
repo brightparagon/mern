@@ -91,16 +91,16 @@ export function listPostFail(error) {
 }
 
 // DISPATCHER FOR EDIT POST
-export function editPostRequest(id, title, contents) {
+export function editPostRequest(id, title, contents, index) {
   return (dispatch) => {
     dispatch(editPost());
     return request
       .put('/api/post/' + id)
+      .set('Content-Type', 'application/json')
       .send({title, contents})
       .then((response) => {
-        dispatch(editPostSuccess(response.body.post));
+        dispatch(editPostSuccess(response.body.post, index));
       }, (error) => {
-        console.log('error!!!!');
         dispatch(editPostFail(error));
       });
   };
@@ -112,10 +112,11 @@ export function editPost() {
   };
 }
 
-export function editPostSuccess(post) {
+export function editPostSuccess(post, index) {
   return {
     type: POST_UPDATE_SUCCESS,
     post,
+    index,
   };
 }
 

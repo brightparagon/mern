@@ -11,7 +11,7 @@ class Post extends React.Component {
 
   handleShow() {
     // Parent로 object 전달 가능, 효율적인진 의문
-    this.props.onShow(this.props.data);
+    this.props.onShow(this.props.data, this.props.index);
   }
 
   render() {
@@ -41,6 +41,7 @@ Post.defaultProps = {
       email: 'email',
     },
   },
+  index: 0,
   onShow: () => {
     console.log('onShow not defined');
   },

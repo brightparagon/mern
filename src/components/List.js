@@ -23,6 +23,9 @@ class List extends React.Component {
           email: '',
         },
       },
+      index: 0,
+      title: '',
+      contents: '',
     };
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -44,10 +47,8 @@ class List extends React.Component {
   }
 
   handleChange(e, {name, value}) {
-    let nextState = {
-      post: {},
-    };
-    nextState.post[name] = value;
+    let nextState = {};
+    nextState[name] = value;
     this.setState(nextState);
   }
 
@@ -65,26 +66,39 @@ class List extends React.Component {
 
   handleEdit() {
     let id = this.state.post._id;
-    let title = this.state.post.title;
-    let contents = this.state.post.contents;
+    let title = this.state.title;
+    let contents = this.state.contents;
+    let index = this.state.index;
 
-    this.props.onEdit(id, title, contents).then(() => {
-      this.setState({
-        editMode: !this.state.editMode,
-      });
+    this.props.onEdit(id, title, contents, index).then((success) => {
+      if(success) {
+        this.setState({
+          editMode: false,
+        });
+      }
     });
   }
 
   handleDelete() {
     let id = this.state.post._id;
-    this.props.onDelete(id);
+    this.props.onDelete(id).then((success) => {
+      if(success) {
+        this.setState({
+          editMode: false,
+          open: false,
+        });
+      }
+    });
   }
 
-  handleShow(post) {
+  handleShow(post, index) {
     this.setState({
       open: true,
       post: post,
+      index: index,
       ownership: this.props.currentUser._id === post.author._id,
+      title: post.title,
+      contents: post.contents,
     });
   }
 
@@ -109,10 +123,10 @@ class List extends React.Component {
       <Modal size='small' dimmer='blurring' open={this.state.open}
         onClose={this.handleClose}>
         <Modal.Header>
-          {this.state.post.title}
+          {this.state.title}
         </Modal.Header>
         <Modal.Content>
-          <p>{this.state.post.contents}</p>
+          <p>{this.state.contents}</p>
         </Modal.Content>
         <Modal.Actions>
           {this.state.ownership ? buttonsOwned :
@@ -127,13 +141,13 @@ class List extends React.Component {
         onClose={this.handleClose}>
         <Modal.Header>
           <Input placeholder='Title'
-            value={this.state.post.title} name='title'
+            value={this.state.title} name='title'
             onChange={this.handleChange}>
           </Input>
         </Modal.Header>
         <Modal.Content>
           <Input placeholder='Contents'
-            value={this.state.post.contents} name='contents'
+            value={this.state.contents} name='contents'
             onChange={this.handleChange}>
             <input/>
           </Input>
@@ -147,10 +161,10 @@ class List extends React.Component {
       </Modal>
     );
 
-    const posts = this.props.posts.map((post) =>
+    const posts = this.props.posts.map((post, i) =>
       <div>
         <br/>
-        <Post key={post._id} data={post} onShow={this.handleShow}/>
+        <Post key={post._id} index={i} data={post} onShow={this.handleShow}/>
       </div>
     );
 
@@ -181,7 +195,7 @@ List.defaultProps = {
     email: '',
     name: '',
   },
-  onEdit: (id, title, contents) => {
+  onEdit: (id, title, contents, index) => {
     console.log('onEdit not defined');
   },
   onDelete: (id) => {
