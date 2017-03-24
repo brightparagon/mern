@@ -16,7 +16,7 @@ class Post extends React.Component {
 
   render() {
     return(
-      <div className="List">
+      <div className="Post">
         <Button color='green' onClick={this.handleShow}>
           {this.props.data.title}
         </Button>

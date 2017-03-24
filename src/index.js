@@ -26,6 +26,7 @@ ReactDOM.render(
         <IndexRoute component={ListContainer}/>
         <Route path="user/signup" component={SignUpContainer}/>
         <Route path="user/signin" component={SignInContainer}/>
+        <Route path="user/profile" component={profileContainer}/>
         <Route path="post/write" component={PostCreateContainer}/>
         <Route path="post/all" component={ListContainer}/>
       </Route>
