@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {
   Button, Container, Input,
-  Header, Modal,
+  Header, Modal, Grid,
 } from 'semantic-ui-react';
 import {Post} from './';
 
@@ -172,9 +172,11 @@ class List extends React.Component {
       <div className="List">
         <br/>
         <br/>
-        <Container text>
-          {posts}
-        </Container>
+        <Grid verticalAlign='middle' centered columns={5}>
+          <Grid.Column>
+            {posts}
+          </Grid.Column>
+        </Grid>
         {this.state.editMode ? editView : postView}
       </div>
     );

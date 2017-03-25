@@ -10,6 +10,7 @@ import {
   SignInContainer,
   PostCreateContainer,
   ListContainer,
+  ProfileContainer,
 } from './containers';
 import App from './App';
 import './index.css';
@@ -26,7 +27,7 @@ ReactDOM.render(
         <IndexRoute component={ListContainer}/>
         <Route path="user/signup" component={SignUpContainer}/>
         <Route path="user/signin" component={SignInContainer}/>
-        <Route path="user/profile" component={profileContainer}/>
+        <Route path="user/profile" component={ProfileContainer}/>
         <Route path="post/write" component={PostCreateContainer}/>
         <Route path="post/all" component={ListContainer}/>
       </Route>

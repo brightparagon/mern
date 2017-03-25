@@ -42,7 +42,7 @@ class SignUp extends React.Component {
       <div className="SignUp">
         <br/>
         <br/>
-        <Grid centered columns={3} verticalAlign='middle'>
+        <Grid verticalAlign='middle' centered columns={5}>
           <Grid.Column>
             <Label color='teal'>Email</Label>
             <br/>

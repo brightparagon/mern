@@ -1,6 +1,5 @@
 import React from 'react';
-import {conntect} from 'react-redux';
-import {browserHistory} from 'react-router';
+import {connect} from 'react-redux';
 import {Profile} from '../components';
 
 class ProfileContainer extends React.Component {
@@ -10,14 +9,14 @@ class ProfileContainer extends React.Component {
 
   render() {
     return(
-      <Profile currentUser={this.props.currentUser}/>
+      <Profile token={this.props.token}/>
     );
   }
 };
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.navigation.status.token,
+    token: state.navigation.status.token,
   };
 };
 

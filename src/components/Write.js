@@ -33,7 +33,6 @@ class Write extends React.Component {
     return(
       <div className="Write">
         <br/>
-        <br/>
         <Container text>
           <Input name='title' placeholder='title'
             value={this.state.title} onChange={this.handleChange}>

@@ -47,7 +47,8 @@ class Navigation extends React.Component {
           <Menu.Item name='home' active={activeItem === 'home'} as={Link}
             to='/' onClick={this.handleItemClick}/>
           <Menu.Item name='profile' active={activeItem === 'profile'} as={Link}
-            to='/user/:userId/profile' onClick={this.handleItemClick}>
+            to='/user/profile'
+            onClick={this.handleItemClick}>
             Profile: {this.props.status.token.name}
           </Menu.Item>
           <Menu.Item name='write' active={activeItem === 'write'} as={Link}

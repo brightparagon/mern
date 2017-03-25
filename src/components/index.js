@@ -4,6 +4,7 @@ import SignIn from './SignIn';
 import Write from './Write';
 import List from './List';
 import Post from './Post';
+import Profile from './Profile';
 
 export {
   Navigation,
@@ -12,4 +13,5 @@ export {
   Write,
   List,
   Post,
+  Profile,
 };
