@@ -1,23 +1,16 @@
 import React from 'react';
-import {Navigation} from '../components';
 import {connect} from 'react-redux';
-import {signoutRequest} from '../actions/user';
+import {Navigation} from '../components';
 
 class NavigationContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSignOut = this.handleSignOut.bind(this);
-  }
-
-  handleSignOut() {
-    this.props.signoutRequest();
-    alert('You are signed out successfully.');
   }
 
   render() {
     return(
       <Navigation status={this.props.status}
-        onSignOut={this.handleSignOut}/>
+        onSignOut={this.props.onSignOut}/>
     );
   }
 }

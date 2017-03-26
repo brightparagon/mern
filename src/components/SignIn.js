@@ -12,7 +12,15 @@ class SignIn extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
+
+  handleKeyPress(e) {
+    // if enter pressed
+    if(e.charCode === 13) {
+      this.handleSignIn();
+    }
+  };
 
   handleChange(e, {name, value}) {
     let nextState = {};
@@ -55,7 +63,7 @@ class SignIn extends React.Component {
             <Label color='orange'>Password</Label>
             <br/>
             <Input value={this.state.password} name='password'
-              onChange={this.handleChange}>
+              onChange={this.handleChange} onKeyPress={this.handleKeyPress}>
               <input type='password'/>
             </Input>
             <br/>

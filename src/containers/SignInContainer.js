@@ -15,6 +15,12 @@ class SignInContainer extends React.Component {
       () => {
         if(this.props.signinStatus.status === "SUCCESS") {
           alert('Hello! ' + this.props.token.name); // String Interpolation
+          let signinData = {
+            isSignedIn: true,
+            userName: this.props.token.name,
+            userEmail: this.props.token.email,
+          };
+          document.cookie = 'key=' + btoa(JSON.stringify(signinData));
           browserHistory.push('/');
           return true;
         } else {

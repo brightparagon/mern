@@ -76,9 +76,8 @@ export function signinRequest(email, password) {
         email: email,
         password: password,
       })
-      .then((response) => { // response가 server에서 전달된 결과를 갖고 있음
-        // response 객체 구조를 모르겠으면 console.log로 뜯어보면 된다
-        // response.data가 없어서 찾아보니 response.body.token으로 전달되었음
+      .then((response) => {
+        // response.body.token으로 전달되었음
         let processedToken = response.body.token.split('.')[1];
         processedToken = JSON.parse(atob(processedToken));
         dispatch(signinSuccess(processedToken));
@@ -120,5 +119,38 @@ export function signoutRequest() {
 export function signout() {
   return {
     type: USER_SIGNOUT,
+  };
+}
+
+export function getStatusRequest() {
+  return (dispatch) => {
+    dispatch(getStatus());
+    return request
+      .get('/api/user/getstatus')
+      .then((response) => {
+        dispatch(getStatusSuccess(response.body.info.userName));
+      }, (error) => {
+        dispatch(getStatusFail(error));
+      });
+  };
+}
+
+export function getStatus() {
+  return {
+    type: USER_GET_STATUS,
+  };
+}
+
+export function getStatusSuccess(userName) {
+  return {
+    type: USER_GET_STATUS_SUCCESS,
+    userName,
+  };
+}
+
+export function getStatusFail(error) {
+  return {
+    type: USER_GET_STATUS_FAIL,
+    failReason: error,
   };
 }

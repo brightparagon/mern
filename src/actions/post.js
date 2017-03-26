@@ -28,7 +28,6 @@ export function createPostRequest(title, contents, userId) {
       .then((response) => {
         dispatch(createPostSuccess());
       }, (error) => {
-        console.log(error);
         dispatch(createPostFail(error));
       });
       // .catch((error) => {

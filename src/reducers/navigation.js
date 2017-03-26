@@ -12,7 +12,7 @@ const initialState = {
     // error: -1,
   },
   status: {
-    valid: false, // 언제 어디서 쓰이는지?
+    valid: false,
     isSignedIn: false,
     token: {
       _id: '',
@@ -96,7 +96,6 @@ export default function navigation(state, action) {
       return update(state, {
         status: {
           valid: {$set: true},
-          currentUser: {$set: action.email},
         },
       });
     case types.USER_GET_STATUS_FAIL:
