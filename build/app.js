@@ -1,5 +1,9 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
@@ -88,3 +92,5 @@ if (process.env.NODE_ENV == 'development') {
     console.log('webpack-dev-server is listening on port', devPort);
   });
 }
+
+exports.default = app;
