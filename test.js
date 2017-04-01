@@ -23,4 +23,15 @@ describe('Server API Test', () => {
         done();
       });
   });
+
+  it('List Post Request: should return a object of posts', (done) => {
+    request(app)
+      .get('/api/post/all')
+      .expect(200)
+      .end((error, response) => {
+        if(error) throw error;
+        assert.equal('object', typeof response.body.posts);
+        done();
+      });
+  });
 });
