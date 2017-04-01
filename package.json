@@ -7,6 +7,7 @@
     "node": "7.4.0"
   },
   "scripts": {
+    "jest": "jest __tests__/*.js",
     "start-old": "webpack-dev-server --hot",
     "clean": "rm -rf build public/bundle.js",
     "build": "babel server --out-dir build --presets=es2015 && webpack",
@@ -77,6 +78,11 @@
     "webpack-dev-server": "^1.16.3"
   },
   "devDependencies": {
+    "babel-jest": "^19.0.0",
+    "chai": "^3.5.0",
+    "enzyme": "^2.8.0",
+    "jest": "^19.0.2",
+    "react-addons-test-utils": "^15.4.2",
     "supertest": "^3.0.0"
   }
 }
