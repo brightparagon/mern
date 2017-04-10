@@ -10,7 +10,7 @@ describe('Server API Test', () => {
       .post('/api/user/signin')
       .expect(200)
       .send({
-        email: 'kyeongmo2@gmail.com',
+        email: 'kyeongmo2@gmail.cm',
         password: '12345',
       })
       .end((error, response) => {

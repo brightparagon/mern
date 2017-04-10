@@ -30,9 +30,6 @@ export function createPostRequest(title, contents, userId) {
       }, (error) => {
         dispatch(createPostFail(error));
       });
-      // .catch((error) => {
-      //   dispatch(createPostFail());
-      // });
   };
 }
 

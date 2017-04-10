@@ -31,13 +31,12 @@ class App extends React.Component {
     if(!signinData.isSignedIn) return;
 
     // check if the cookie is valid when page refreshed
-    this.props.getStatusRequest().then(() => {
+    this.props.getStatusRequest(this.props.status.token._id).then(() => {
       if(!this.props.status.valid) {
         // if invalid, sign out
         signinData = {
           isSignedIn: false,
           userName: '',
-          userEmail: '',
         };
         document.cookie = 'key=' + btoa(JSON.stringify(signinData));
         alert('Your session is expired. Please sign in again.');
@@ -50,7 +49,6 @@ class App extends React.Component {
       let signinData = {
         isSignedIn: false,
         userName: '',
-        userEmail: '',
       };
       document.cookie = 'key=' + btoa(JSON.stringify(signinData));
     });

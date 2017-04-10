@@ -4,16 +4,16 @@ import User from '../models/user';
 const router = express.Router();
 
 /*
-    ACCOUNT SIGN UP: POST /api/user/signup
-    BODY SAMPLE: {
-      "email": "test",
-      "name": "test",
-      "password": "test",
-    }
-    ERROR CODES:
-      1: BAD USERNAME
-      2: BAD PASSWORD
-      3: USERNAME EXISTS
+  ACCOUNT SIGN UP: POST /api/user/signup
+  BODY SAMPLE: {
+    "email": "test",
+    "name": "test",
+    "password": "test",
+  }
+  ERROR CODES:
+    1: BAD USERNAME
+    2: BAD PASSWORD
+    3: USERNAME EXISTS
 */
 router.post('/signup', (req, res) => {
   // CHECK USERNAME FORMAT
@@ -63,13 +63,13 @@ router.post('/signup', (req, res) => {
 });
 
 /*
-    ACCOUNT SIGN IN: POST /api/user/signin
-    BODY SAMPLE: {
-      "email": "test",
-      "password": "test",
-    }
-    ERROR CODES:
-      1: SIGN IN FAILED
+  ACCOUNT SIGN IN: POST /api/user/signin
+  BODY SAMPLE: {
+    "email": "test",
+    "password": "test",
+  }
+  ERROR CODES:
+    1: SIGN IN FAILED
 */
 router.post('/signin', (req, res) => {
   if(typeof req.body.password !== 'string') {
@@ -95,6 +95,18 @@ router.post('/signin', (req, res) => {
       });
     }
   })(req, res);
+});
+
+router.get('/getstatus', (req, res) => {
+  User.findOne({_id: req.body.id}, (err, user) => {
+    let result = false;
+    if(user) {
+      result = true;
+    }
+    res.json({
+      result: result,
+    });
+  });
 });
 
 export default router;

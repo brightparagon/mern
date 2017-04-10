@@ -21,16 +21,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /*
-    ACCOUNT SIGN UP: POST /api/user/signup
-    BODY SAMPLE: {
-      "email": "test",
-      "name": "test",
-      "password": "test",
-    }
-    ERROR CODES:
-      1: BAD USERNAME
-      2: BAD PASSWORD
-      3: USERNAME EXISTS
+  ACCOUNT SIGN UP: POST /api/user/signup
+  BODY SAMPLE: {
+    "email": "test",
+    "name": "test",
+    "password": "test",
+  }
+  ERROR CODES:
+    1: BAD USERNAME
+    2: BAD PASSWORD
+    3: USERNAME EXISTS
 */
 router.post('/signup', function (req, res) {
   // CHECK USERNAME FORMAT
@@ -80,13 +80,13 @@ router.post('/signup', function (req, res) {
 });
 
 /*
-    ACCOUNT SIGN IN: POST /api/user/signin
-    BODY SAMPLE: {
-      "email": "test",
-      "password": "test",
-    }
-    ERROR CODES:
-      1: SIGN IN FAILED
+  ACCOUNT SIGN IN: POST /api/user/signin
+  BODY SAMPLE: {
+    "email": "test",
+    "password": "test",
+  }
+  ERROR CODES:
+    1: SIGN IN FAILED
 */
 router.post('/signin', function (req, res) {
   if (typeof req.body.password !== 'string') {
@@ -112,6 +112,18 @@ router.post('/signin', function (req, res) {
       });
     }
   })(req, res);
+});
+
+router.get('/getstatus', function (req, res) {
+  _user2.default.findOne({ _id: req.body.id }, function (err, user) {
+    var result = false;
+    if (user) {
+      result = true;
+    }
+    res.json({
+      result: result
+    });
+  });
 });
 
 exports.default = router;

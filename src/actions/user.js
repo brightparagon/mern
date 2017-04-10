@@ -23,13 +23,6 @@ export function signupRequest(email, name, password) {
     return request
       .post('/api/user/signup')
       .send({email, name, password})
-      // .end((err, res) => {
-      //   // --> Update codes in the server <error codes>
-      //   // if(err) dispatch(signupFail(error.response.data.code));
-      //   if(err) return dispatch(signupFail());
-      //   dispatch(signupSuccess());
-      // });
-      // superagent의 .end는 가장 마지막에 실행되는 Promise이다(.then 보다도 더).
       .then((response) => {
         dispatch(signupSuccess());
       }).catch((error) => {
@@ -51,13 +44,6 @@ export function signupSuccess() {
     // email
   };
 }
-
-// export function signupFail(error) {
-//   return {
-//     type: USER_SIGNUP_FAIL,
-//     error,
-//   };
-// }
 
 export function signupFail() {
   return {
@@ -120,13 +106,14 @@ export function signout() {
   };
 }
 
-export function getStatusRequest() {
+export function getStatusRequest(id) {
   return (dispatch) => {
     dispatch(getStatus());
     return request
       .get('/api/user/getstatus')
+      .send({id: id})
       .then((response) => {
-        dispatch(getStatusSuccess(response.body.info.userName));
+        dispatch(getStatusSuccess(response.body.result));
       }, (error) => {
         dispatch(getStatusFail(error));
       });
@@ -139,16 +126,16 @@ export function getStatus() {
   };
 }
 
-export function getStatusSuccess(userName) {
+export function getStatusSuccess(result) {
   return {
     type: USER_GET_STATUS_SUCCESS,
-    userName,
+    result,
   };
 }
 
-export function getStatusFail(error) {
+export function getStatusFail(failReason) {
   return {
     type: USER_GET_STATUS_FAIL,
-    failReason: error,
+    failReason,
   };
 }

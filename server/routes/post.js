@@ -36,6 +36,7 @@ router.post('/', (req, res, next) => {
 });
 
 // RETRIEVE POST
+// NOT USED YET
 router.get('/:postId', (req, res, next) => {
   Post.findById(req.params.postId).populate('author').exec(function(err, post) {
     if(err) return next(err);

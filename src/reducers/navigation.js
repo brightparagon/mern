@@ -95,7 +95,7 @@ export default function navigation(state, action) {
     case types.USER_GET_STATUS_SUCCESS:
       return update(state, {
         status: {
-          valid: {$set: true},
+          valid: {$set: action.result},
         },
       });
     case types.USER_GET_STATUS_FAIL:
