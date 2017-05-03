@@ -8,7 +8,7 @@ class Navigation extends React.Component {
     this.handleSignOut = this.handleSignOut.bind(this);
     this.handleItemClick = this.handleItemClick.bind(this);
     this.state = {
-      activeItem: 'home',
+      activeItem: 'home'
     };
   }
 
@@ -73,7 +73,7 @@ class Navigation extends React.Component {
 
 Navigation.propTypes = {
   status: React.PropTypes.object,
-  onSignOut: React.PropTypes.func,
+  onSignOut: React.PropTypes.func
 };
 
 Navigation.defaultProps = {
@@ -84,12 +84,12 @@ Navigation.defaultProps = {
       _id: '',
       email: '',
       name: '',
-      exp: 0,
-    },
+      exp: 0
+    }
   },
   onSignOut: () => {
     console.error('onSignOut not defined');
-  },
+  }
 };
 
 export default Navigation;

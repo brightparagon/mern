@@ -9,7 +9,7 @@ router.get('/all', (req, res, next) => {
   Post.find().populate('author').exec(function(err, posts) {
     if(err) return next(err);
     return res.json({
-      posts: posts,
+      posts: posts
     });
   });
 });
@@ -23,7 +23,7 @@ router.post('/', (req, res, next) => {
   post.save(function(err, post) {
     if(err) return next(err);
     return res.json({
-      post: post,
+      post: post
     });
   });
 
@@ -41,7 +41,7 @@ router.get('/:postId', (req, res, next) => {
   Post.findById(req.params.postId).populate('author').exec(function(err, post) {
     if(err) return next(err);
     return res.json({
-      post: post,
+      post: post
     });
   });
 });
@@ -53,7 +53,7 @@ router.put('/:postId', (req, res, next) => {
     {new: true}).populate('author').exec(function(err, post) {
     if(err) return next(err);
     return res.json({
-      post: post,
+      post: post
     });
   });
 });
@@ -64,7 +64,7 @@ router.delete('/:postId', (req, res, next) => {
   Post.findByIdAndRemove(req.params.postId, function(err) {
     if(err) return next(err);
     return res.json({
-      success: true,
+      success: true
     });
   });
 });

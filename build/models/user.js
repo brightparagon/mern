@@ -53,4 +53,21 @@ userSchema.methods.generateJwt = function () {
   }, 'mernblog');
 };
 
-exports.default = _mongoose2.default.model('User', userSchema);
+var _default = _mongoose2.default.model('User', userSchema);
+
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(Schema, 'Schema', 'server/models/user.js');
+
+  __REACT_HOT_LOADER__.register(userSchema, 'userSchema', 'server/models/user.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'server/models/user.js');
+}();
+
+;

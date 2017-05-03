@@ -31,7 +31,7 @@ router.post('/signup', (req, res) => {
   if(req.body.password.length < 4 || typeof req.body.password !== "string") {
     return res.status(400).json({
       error: "BAD PASSWORD",
-      code: 2,
+      code: 2
     });
   }
 
@@ -41,7 +41,7 @@ router.post('/signup', (req, res) => {
     if(exists) {
       return res.status(409).json({
         error: "EMAIL EXISTS",
-        code: 3,
+        code: 3
       });
     }
 
@@ -55,7 +55,7 @@ router.post('/signup', (req, res) => {
     user.save( (err, user) => {
       if(err) throw err;
       return res.json({
-        success: true,
+        success: true
       });
       // res.render('profile', {user: req.session.user});
     });
@@ -74,24 +74,24 @@ router.post('/signup', (req, res) => {
 router.post('/signin', (req, res) => {
   if(typeof req.body.password !== 'string') {
     return res.status(401).send({
-      failReason: 'Password you put is not characters.',
+      failReason: 'Password you put is not characters.'
     });
   }
 
   passport.authenticate('local', function(err, user, info) {
     if(err) {
       return res.status(401).send({
-        failReason: 'err authenticate in server ' + err,
+        failReason: 'err authenticate in server ' + err
       });
     }
     if(user) {
       let token = user.generateJwt();
       return res.json({
-        token: token,
+        token: token
       });
     } else {
       res.status(401).send({
-        failReason: info,
+        failReason: info
       });
     }
   })(req, res);
@@ -104,7 +104,7 @@ router.get('/getstatus', (req, res) => {
       result = true;
     }
     res.json({
-      result: result,
+      result: result
     });
   });
 });

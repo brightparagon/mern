@@ -42,3 +42,14 @@ _passport2.default.use(new LocalStrategy({
     return done(null, user);
   });
 }));
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(LocalStrategy, 'LocalStrategy', 'server/passport.js');
+}();
+
+;

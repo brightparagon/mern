@@ -79,18 +79,40 @@ app.get('*', function (req, res) {
   res.sendFile(_path2.default.resolve(__dirname, './../public/index.html'));
 });
 
-app.listen(port, function () {
-  console.log('Express is listening on port: ', port);
-});
-
 if (process.env.NODE_ENV == 'development') {
   console.log('Server is running on development mode');
   var config = require('../webpack.dev.config');
   var compiler = (0, _webpack2.default)(config);
   var devServer = new _webpackDevServer2.default(compiler, config.devServer);
   devServer.listen(devPort, function () {
-    console.log('webpack-dev-server is listening on port', devPort);
+    console.log('webpack-dev-server is listening on port: ', devPort);
   });
 }
 
-exports.default = app;
+app.listen(port, function () {
+  console.log('Express is listening on port: ', port);
+});
+
+var _default = app;
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(app, 'app', 'server/app.js');
+
+  __REACT_HOT_LOADER__.register(port, 'port', 'server/app.js');
+
+  __REACT_HOT_LOADER__.register(devPort, 'devPort', 'server/app.js');
+
+  __REACT_HOT_LOADER__.register(dbUrl, 'dbUrl', 'server/app.js');
+
+  __REACT_HOT_LOADER__.register(db, 'db', 'server/app.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'server/app.js');
+}();
+
+;
