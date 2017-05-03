@@ -20,5 +20,6 @@
     "require-jsdoc": "off",
     "quotes": "off",
     "new-cap": "off",
+    "comma-dangle": ["error", "never"],
   }
 }

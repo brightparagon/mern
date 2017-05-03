@@ -36,7 +36,7 @@ class App extends React.Component {
         // if invalid, sign out
         signinData = {
           isSignedIn: false,
-          userName: '',
+          userName: ''
         };
         document.cookie = 'key=' + btoa(JSON.stringify(signinData));
         alert('Your session is expired. Please sign in again.');
@@ -48,7 +48,7 @@ class App extends React.Component {
     this.props.signoutRequest().then(() => {
       let signinData = {
         isSignedIn: false,
-        userName: '',
+        userName: ''
       };
       document.cookie = 'key=' + btoa(JSON.stringify(signinData));
     });
@@ -70,7 +70,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    status: state.navigation.status,
+    status: state.navigation.status
   };
 };
 
@@ -81,7 +81,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     signoutRequest: () => {
       return dispatch(signoutRequest());
-    },
+    }
   };
 };
 

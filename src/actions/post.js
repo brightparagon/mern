@@ -13,7 +13,7 @@ import {
   POST_READ_FAIL,
   POST_DELETE,
   POST_DELETE_SUCCESS,
-  POST_DELETE_FAIL,
+  POST_DELETE_FAIL
 } from './ActionTypes';
 import request from 'superagent';
 
@@ -21,7 +21,6 @@ import request from 'superagent';
 export function createPostRequest(title, contents, userId) {
   return (dispatch) => {
     dispatch(createPost());
-
     return request
       .post('/api/post/')
       .send({title, contents, userId})
@@ -35,20 +34,20 @@ export function createPostRequest(title, contents, userId) {
 
 export function createPost() {
   return {
-    type: POST_UPLOAD,
+    type: POST_UPLOAD
   };
 }
 
 export function createPostSuccess() {
   return {
-    type: POST_UPLOAD_SUCCESS,
+    type: POST_UPLOAD_SUCCESS
   };
 }
 
 export function createPostFail(error) {
   return {
     type: POST_UPLOAD_FAIL,
-    failReason: error,
+    failReason: error
   };
 }
 
@@ -68,21 +67,21 @@ export function listPostRequest() {
 
 export function listPost() {
   return {
-    type: POST_LIST,
+    type: POST_LIST
   };
 }
 
 export function listPostSuccess(posts) {
   return {
     type: POST_LIST_SUCCESS,
-    posts,
+    posts
   };
 }
 
 export function listPostFail(error) {
   return {
     type: POST_LIST_FAIL,
-    failReason: error,
+    failReason: error
   };
 }
 
@@ -104,7 +103,7 @@ export function editPostRequest(id, title, contents, index) {
 
 export function editPost() {
   return {
-    type: POST_UPDATE,
+    type: POST_UPDATE
   };
 }
 
@@ -112,14 +111,14 @@ export function editPostSuccess(post, index) {
   return {
     type: POST_UPDATE_SUCCESS,
     post,
-    index,
+    index
   };
 }
 
 export function editPostFail(error) {
   return {
     type: POST_UPDATE_FAIL,
-    failReason: error,
+    failReason: error
   };
 }
 
@@ -139,19 +138,19 @@ export function deletePostRequest(id) {
 
 export function deletePost() {
   return {
-    type: POST_DELETE,
+    type: POST_DELETE
   };
 }
 
 export function deletePostSuccess() {
   return {
-    type: POST_DELETE_SUCCESS,
+    type: POST_DELETE_SUCCESS
   };
 }
 
 export function deletePostFail(error) {
   return {
     type: POST_DELETE_FAIL,
-    failReason: error,
+    failReason: error
   };
 }
